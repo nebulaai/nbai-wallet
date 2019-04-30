@@ -1,0 +1,23 @@
+<header [ngClass]="{'create': ifCreate}">
+  <div class="nav">
+    <div class="walletlogo">
+      <a href="javascript:;">
+        <img src="assets/imgs/icons/wallet_logo_blk.png" alt="NBAI Wallet" id="logo" />
+      </a>
+    </div>
+    <div class="download">
+      <a href="https://github.com/nebulaai/nbai-wallet/releases" target="_blank">
+        {{translationService.isEn? translationService.enMap['OFFLINEVERSION']:translationService.cnMap['OFFLINEVERSION']}}
+      </a>
+    </div>
+    <div class="setting">
+      <a (click)="toggleSetting()" href="javascript:;" [ngClass]="{'m-header__setting-show': settingShow}">
+        <img src="assets/imgs/icons//Settings-01.svg" style="width: 36px; display: none;" />
+        <input id="en" name="language" type="radio" (change)="setLang('en')" />
+        <label for="en">EN</label> &nbsp;|&nbsp;
+        <input id="cn" name="language" type="radio" (change)="setLang('cn')" />
+        <label for="cn">中文</label>
+      </a>
+    </div>
+  </div>
+</header>

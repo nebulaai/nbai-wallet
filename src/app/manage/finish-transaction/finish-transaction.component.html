@@ -1,0 +1,22 @@
+<div class="popup finish" id="popup">
+  <form name="editForm" role="form" novalidate #editForm="ngForm">
+    <div class="modal-body text-center" style="padding: 0px;">
+      <div class="logo">
+        <img src="assets/imgs/icons/alert-icon.png" alt="alert">
+      </div>
+      <div class="title">
+        <h2>{{translationService.isEn? translationService.enMap['COMPLETED']:translationService.cnMap['COMPLETED']}}!
+        </h2>
+      </div>
+      <div class="info">
+        <p style="word-wrap: break-word">
+          {{translationService.isEn? translationService.enMap['SUCCESS']:translationService.cnMap['SUCCESS']}}
+          {{translationService.isEn? translationService.enMap['YOURTRANSACTIONHASHIS']:translationService.cnMap['YOURTRANSACTIONHASHIS']}}
+          <a class="add-detail" href="{{scanUrl}}tx/{{web3Service.txHash}}" target="_blank">{{web3Service.txHash}}</a>
+        </p>
+        <a class="a-close"
+          (click)="close()">{{translationService.isEn? translationService.enMap['CLOSE']:translationService.cnMap['CLOSE']}}</a>
+      </div>
+    </div>
+  </form>
+</div>

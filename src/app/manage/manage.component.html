@@ -1,0 +1,34 @@
+<div class="main-container">
+  <div class="drawer">
+    <div class="balance">
+      <h1>{{translationService.isEn? translationService.enMap['TOTALBALANCE']:translationService.cnMap['TOTALBALANCE']}}
+        <br>
+        <span class = "total">{{(total||0) | number: '1.2-2'}}</span> NBAI
+      </h1>
+    </div>
+    <ul>
+      <li class="navLink active" navLink="navLink">
+        <a href="javascript:;" routerLink="main">
+          <div class="text">{{translationService.isEn? translationService.enMap['DASHBOARD']:translationService.cnMap['DASHBOARD']}}</div>
+        </a>
+      </li>
+      <li class="navLink" navLink="navLink">
+        <a href="javascript:;" routerLink="transfer">
+          <div class="text">{{translationService.isEn? translationService.enMap['SEND']:translationService.cnMap['SEND']}}</div>
+        </a>
+
+      </li>
+      <li class="navLink" navLink="navLink">
+        <a href="https://swap.nbai.io/" target = "_blank">
+          <div class="text">{{translationService.isEn? translationService.enMap['TOKENSWAP']:translationService.cnMap['TOKENSWAP']}}</div>
+        </a>
+      </li>
+      <li class="navLink" navLink="navLink">
+        <a href="{{scanUrl}}" target = "_blank">
+          <div class="text">{{translationService.isEn? translationService.enMap['EXPLORER']:translationService.cnMap['EXPLORER']}}</div>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <router-outlet></router-outlet>
+</div>
