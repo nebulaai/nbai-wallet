@@ -1,0 +1,41 @@
+<div class="details-content">
+  <div class="icon">
+    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+      x="0px" y="0px" viewBox="0 0 80 80" style="enable-background:new 0 0 80 80;" xml:space="preserve">
+      <g>
+        <circle class="st0" cx="40" cy="40" r="40" />
+        <circle class="st1" cx="29.1" cy="48.7" r="14.7" />
+        <polyline class="st1" points="34,34.7 34.2,22 60.9,22 60.9,48.7 43.9,48.7" />
+      </g>
+    </svg>
+  </div>
+  <div class="wallet-name">{{account["name"]}}</div>
+  <div class="wallet-address"><a href="{{scanUrl}}address/{{account.address}}"
+      target="_blank">{{account["address"] | address:10:6}}</a> &nbsp;&nbsp;
+    <a href="javascript:;" copy [copyValue]="account.address"><img src="assets/imgs/icons/copy.svg"
+        style="width: 20px;" /></a>
+  </div>
+  <div class="wallet-balance">{{account['balance'] | number:'.3-3'}} NBAI</div>
+
+  <div class="wallet-details">
+
+    <div class="qrcode" *ngIf="account['address']">
+      <qrcode [qrdata]="account.address" [size]="160" [level]="'M'"></qrcode>
+    </div>
+    <div class="btns">
+      <button routerLink="/dashboard/transfer"
+        [queryParams]="{address: account['address']}">{{translationService.isEn? translationService.enMap['SENDWITHADD']:translationService.cnMap['SENDWITHADD']}}</button>
+      <button
+        [routerLink]="['/',{outlets: {popup: ['export-key']}}]">{{translationService.isEn? translationService.enMap['EXPORTPRIVATE']:translationService.cnMap['EXPORTPRIVATE']}}</button>
+      <button
+        [routerLink]="['/',{outlets: {popup: ['export-keystore']}}]">{{translationService.isEn? translationService.enMap['EXPORTKEYSTORE']:translationService.cnMap['EXPORTKEYSTORE']}}</button>
+    </div>
+  </div>
+
+  <div class="link btn-add"><a href="{{scanUrl}}address/{{account.address}}"
+      target="_blank">{{scanUrl}}address/{{account.address}}</a>
+    &nbsp;&nbsp;<a href="javascript:;" (click)="copy(scanUrl + 'address/' + account['address'])"><img
+        src="assets/imgs/icons/copy.svg" style="width: 20px;" /></a>
+
+  </div>
+</div>

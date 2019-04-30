@@ -1,0 +1,32 @@
+<div class="popup" id="popup">
+  <form name="editForm" role="form" novalidate (ngSubmit)="next()" #editForm="ngForm">
+    <div class="modal-header">
+      <div class="modal-title" id="myUserLabel">
+        {{translationService.isEn? translationService.enMap['ADD']:translationService.cnMap['ADD']}}</div>
+      <a href="javascript:;" data-dismiss="modal" aria-hidden="true" (click)="close()">&times;</a>
+    </div>
+    <div class="modal-body">
+      <div class="form-group" [ngClass]="{'has-danger': mnemonic.invalid && (mnemonic.dirty || mnemonic.touched ),
+                                'has-success': mnemonic.valid && (mnemonic.dirty || mnemonic.touched)}">
+        <label class="subtitle"
+          for="mnemonic">{{translationService.isEn? translationService.enMap['PLEASEWORDS']:translationService.cnMap['PLEASEWORDS']}}</label>
+        <textarea class="full-width" name="mnemonic" id="mnemonic" rows="8" ngModel #mnemonic="ngModel" required
+          [disabled]="loading"></textarea>
+        <span
+          *ngIf="errMsg">{{translationService.isEn? translationService.enMap['MINVALID']:translationService.cnMap['MINVALID']}}</span>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div [ngClass]="{'loading': loading}">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot active"></span>
+      </div>
+      <div class="btn">
+        <button type="submit" [disabled]="editForm.form.invalid" class="next">
+          {{translationService.isEn? translationService.enMap['NEXT']:translationService.cnMap['NEXT']}}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
