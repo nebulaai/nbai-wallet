@@ -1,0 +1,35 @@
+<div class="popup" id="popup">
+  <form name="editForm" role="form" novalidate (ngSubmit)="submit()" #editForm="ngForm">
+    <div class="modal-header">
+      <div class="modal-title" id="myUserLabel">
+        {{translationService.isEn? translationService.enMap['EXPORTPRIVATE']:translationService.cnMap['EXPORTPRIVATE']}}
+      </div>
+      <a href="javascript:;" aria-hidden="true" (click)="close()">&times;</a>
+    </div>
+    <div class="modal-body">
+      <div class="subtitle">
+        {{translationService.isEn? translationService.enMap['WARNINGEXPORT']:translationService.cnMap['WARNINGEXPORT']}}
+      </div>
+      <div class="form-group" [ngClass]="{'has-danger': password.invalid && (password.dirty || password.touched ),
+                              'has-success': password.valid && (password.dirty || password.touched)}">
+        <div>
+          <label>{{translationService.isEn? translationService.enMap['ENTER']:translationService.cnMap['ENTER']}}</label>
+        </div>
+        <input type="password" name="password" #password="ngModel" ngModel maxlength="30" [disabled]="!sendPassword"
+          required>
+        <span
+          *ngIf="password.errors?.incorrect">{{translationService.isEn? translationService.enMap['PASSWORDINCORRECT']:translationService.cnMap['PASSWORDINCORRECT']}}</span>
+      </div>
+      <textarea *ngIf="!sendPassword" name="privateKey" id="privateKey" rows="5">{{privateKey}}</textarea>
+
+    </div>
+    <div class="modal-footer">
+      <button class="default" type="submit" [disabled]="editForm.form.invalid" (click)="copyPK()">
+        {{sendPassword? 
+          (translationService.isEn? translationService.enMap['EXPORT']:translationService.cnMap['EXPORT']):
+          (translationService.isEn? translationService.enMap['COPY']:translationService.cnMap['COPY'])
+        }}
+      </button>
+    </div>
+  </form>
+</div>
