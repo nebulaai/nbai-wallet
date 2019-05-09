@@ -1,0 +1,162 @@
+<div class="popupSpecial" id="popup">
+  <div class="formContainer">
+    <form name="editForm" role="form" novalidate #editForm="ngForm">
+      <div class="modal-header">
+        <div class="modal-title" id="myUserLabel">
+          {{translationService.isEn?
+          translationService.enMap['IMPORT']:translationService.cnMap['IMPORT']}}</div>
+        <a href="javascript:;" data-dismiss="modal" aria-hidden="true" (click)="close()">&times;</a>
+      </div>
+      <div class="tabs row">
+        <div class="col-4 tab text-center" (click)="mode=1;" [ngClass]="{'current': mode==1}">
+          {{translationService.isEn?
+              translationService.enMap['IMPORTKEYSTOREFILE']:translationService.cnMap['IMPORTKEYSTOREFILE']}}
+        </div>
+        <div class="col-4 tab text-center" (click)="mode=2;" [ngClass]="{'current': mode==2}">
+          {{translationService.isEn?
+              translationService.enMap['IMPORTPRIVATEKEY']:translationService.cnMap['IMPORTPRIVATEKEY']}}
+        </div>
+        <div class="col-4 tab text-center" (click)="mode=3;" [ngClass]="{'current': mode==3}">
+          {{translationService.isEn?
+              translationService.enMap['IMPORTMNEMONIC']:translationService.cnMap['IMPORTMNEMONIC']}}
+        </div>
+      </div>
+      <div [style.display]="mode==1?'block':'none'">
+        <div class="modal-body">
+          <div class="form-group" [ngClass]="{'has-danger': keystore.invalid && (keystore.dirty || keystore.touched ),
+                              'has-success': keystore.valid && (keystore.dirty || keystore.touched)}">
+            <label class="subtitle" for="keystore">{{translationService.isEn?
+              translationService.enMap['PLEASEKEYSTORE']:translationService.cnMap['PLEASEKEYSTORE']}}</label>
+            <div class="input-file-container js">
+              <input class="input-file" id="my-file" type="file" name="keystore" id="keystore" ngModel
+                #keystore="ngModel" (change)="handleFileInput($event.target.files)">
+              <label tabindex="0" for="my-file" class="input-file-trigger">{{file['name'] ||
+                (translationService.isEn?
+                translationService.enMap['IMPORTKEYSTORE']:translationService.cnMap['IMPORTKEYSTORE'])
+                | slice:0:28 }}</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div>
+              <label>{{translationService.isEn? translationService.enMap['ENTER']:translationService.cnMap['ENTER']}}</label>
+            </div>
+            <input type="password" name="password" #password="ngModel" ngModel maxlength="30" required>
+          </div>
+          <div class="has-danger" *ngIf="incorrect">
+            <span>{{translationService.isEn?
+              translationService.enMap['KEYSTOREPASSWORDINCORRECT']:translationService.cnMap['KEYSTOREPASSWORDINCORRECT']}}</span>
+          </div>
+        </div>
+        <div class="modal-footer" style="border:none;">
+          <button class="default" (click)="submit()" [disabled]="editForm.form.invalid">
+            {{translationService.isEn? translationService.enMap['RESTORE']:translationService.cnMap['RESTORE']}}
+          </button>
+        </div>
+      </div>
+    </form>
+    <form name="editForm2" role="form" novalidate #editForm2="ngForm">
+      <div [style.display]="mode==2?'block':'none'">
+        <div class="modal-body">
+          <div class="form-group">
+            <div>
+              <label>{{translationService.isEn?
+                translationService.enMap['ENTERPRIVATEKEY']:translationService.cnMap['ENTERPRIVATEKEY']}}</label>
+            </div>
+            <input type="text" name="privateKey" pattern="^0x[0-9a-zA-Z]{64}$" #privateKey="ngModel" ngModel required
+              autocomplete="off">
+            <span *ngIf="privateKey.errors?.pattern" style="color: #d10000; font-size: 12px;">
+              {{translationService.isEn?
+              translationService.enMap['PRIVATEKEYINCORRECT']:translationService.cnMap['PRIVATEKEYINCORRECT']}}</span>
+          </div>
+          <div class="form-group" [ngClass]="{'has-danger': password2.invalid && (password2.dirty || password2.touched ),
+    'has-success': password2.valid && (password2.dirty || password2.touched)}">
+            <div>
+              <label>{{translationService.isEn?
+                translationService.enMap['ENTERNEWKEY']:translationService.cnMap['ENTERNEWKEY']}}</label>
+            </div>
+            <input type="password" name="password2" #password2="ngModel" ngModel maxlength="30" required
+              pattern="^(?=.*\d)(?=.*[a-z]).{6,30}$">
+            <span *ngIf="password2.errors?.pattern && (password2.dirty || password2.touched )">{{translationService.isEn?
+              translationService.enMap['PASSFORMAT']:translationService.cnMap['PASSFORMAT']}}</span>
+          </div>
+        </div>
+        <div class="modal-footer" style="border:none;">
+          <button class="default" (click)="submit2()" [disabled]="editForm2.form.invalid">
+            {{translationService.isEn? translationService.enMap['RESTORE']:translationService.cnMap['RESTORE']}}
+          </button>
+        </div>
+      </div>
+    </form>
+    <form name="editForm3" role="form" novalidate #editForm3="ngForm">
+      <div [style.display]="mode==3?'block':'none'">
+        <div class="modal-body">
+          <div class="form-group">
+            <div>
+              <label>{{translationService.isEn?
+                translationService.enMap['ENTERMNEMONIC']:translationService.cnMap['ENTERMNEMONIC']}}</label>
+            </div>
+            <textarea name="mnemonic" cols="50" rows="3" #mnemonic="ngModel" ngModel required
+              autocomplete="off"></textarea>
+          </div>
+          <div class="restore-section modal-footer" style="border:none;">
+            <button class="default" (click)="mnemonicRestoreClicked=true; pagePosition=0; restoreMnemonic()">
+              {{translationService.isEn? translationService.enMap['RESTORE']:translationService.cnMap['RESTORE']}}
+            </button>
+            <span [style.display]="mnemonicRestoreClicked?'block':'none'">
+              {{translationService.isEn? translationService.enMap['AFTERRESTORE']:translationService.cnMap['AFTERRESTORE']}}</span>
+          </div>
+          <div>
+            <div [style.display]="mnemonicRestoreClicked?'block':'none'">
+              <div class="row address-list-title">
+                <div class="col-1"></div>
+                <div class="col-8 text-center">
+                  {{translationService.isEn?
+                      translationService.enMap['ADDRESS']:translationService.cnMap['ADDRESS']}}
+                </div>
+                <div class="col-3 text-center">
+                  {{translationService.isEn?
+                      translationService.enMap['AMOUNT']:translationService.cnMap['AMOUNT']}}
+                </div>
+              </div>
+              <div *ngFor="let account of accounts" (click)="selectAccount(account);"
+                onmouseover="this.style.color='orange';" onmouseout="this.style.color='';" class="address-list row">
+                <div class="col-1">
+                  <input type="radio" name="address" value='{{account.address}}' id="{{account.address}}">
+                </div>
+                <div class="col-8">
+                  <label for="{{account.address}}">{{ account.address}}</label>
+                </div>
+                <div class="col-3 balance text-center">
+                  {{account.balance}}
+                </div>
+              </div>
+              <button (click)="toPrevious(); restoreMnemonic();" [disabled]="this.pagePosition==0">PREV</button>
+              <button (click)="toNext(); restoreMnemonic()">NEXT</button>
+            </div>
+          </div>
+          <div [style.display]="mnemonicAccountSelected?'block':'none'" class="form-group" [ngClass]="{'has-danger': password3.invalid && (password2.dirty || password3.touched ),
+  'has-success': password3.valid && (password3.dirty || password3.touched)}">
+            <div>
+              <label>{{translationService.isEn?
+                translationService.enMap['ENTERNEWKEY']:translationService.cnMap['ENTERNEWKEY']}}</label>
+            </div>
+            <input type="password" name="password3" #password3="ngModel" ngModel maxlength="30" required
+              pattern="^(?=.*\d)(?=.*[a-z]).{6,30}$">
+            <span *ngIf="password3.errors?.pattern && (password3.dirty || password3.touched )">{{translationService.isEn?
+              translationService.enMap['PASSFORMAT']:translationService.cnMap['PASSFORMAT']}}</span>
+          </div>
+        </div>
+        <div [style.display]="mnemonicAccountSelected?'block':'none'">
+          <div class="modal-footer" style="border:none;">
+            <button class="default" (click)="submit3()" [disabled]="editForm3.form.invalid">
+              {{translationService.isEn? translationService.enMap['RESTORE']:translationService.cnMap['RESTORE']}}
+            </button>
+          </div>
+          <div class="form-group" [ngClass]="{'has-danger': password3.invalid && (password3.dirty || password3.touched ),
+  'has-success': password3.valid && (password3.dirty || password3.touched)}">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,139 @@
+<div class="transfer-content">
+  <form name="editForm" role="form" novalidate (ngSubmit)="submit()" #editForm="ngForm">
+    <div class="form-group" [ngClass]="{'has-danger': account.invalid && (account.dirty || account.touched),
+                                          'has-success': account.valid && (account.dirty || account.touched)}">
+      <label for="account"> {{translationService.isEn?
+        translationService.enMap['FROM']:translationService.cnMap['FROM']}}*</label>
+      <select required name="account" id="account" (change)="selectAccount()" [(ngModel)]=currentAccount
+        #account="ngModel" class="form-control form-control-sm">
+        <option *ngFor="let account of accounts" [ngValue]="account">{{account.name}}&nbsp;-&nbsp;{{account.address |
+          address:10:10}}&nbsp;-&nbsp;{{account.balance | number:'.2-2'}} NBAI</option>
+      </select>
+<<<<<<< HEAD
+
+      <!-- <input required #addFrom (keyup)="onEnter(addFrom.value)" name="from" id="from"
+        class="form-control form-control-sm frominput" *ngIf="needInput" (click)="toggleDropDownFrom()"
+        autocomplete="off">
+      <i class="fa fa-angle-down fromsign" (click)="toggleDropDownFrom()" *ngIf="needInput"></i> -->
+
+=======
+>>>>>>> origin/master
+      <div class="form-control-feedback" *ngIf="account.invalid&&(account.dirty || account.touched)">Wallet Address is
+        required</div>
+    </div>
+    <div class="form-group" [ngClass]="{'has-danger': to.invalid && (to.dirty || to.touched ),
+                                          'has-success': to.valid && (to.dirty || to.touched)}">
+      <label for="to">
+        {{translationService.isEn? translationService.enMap['TO']:translationService.cnMap['TO']}}*</label>
+<<<<<<< HEAD
+      <!-- <input  required [(ngModel)]="tx.to" #to="ngModel" name="to"  id="to" class="form-control form-control-sm" list="name-to" autocomplete="off"
+        style="overflow: hidden; text-overflow: ellipsis; padding-right: 10rem; white-space: nowrap;">
+        <i class="fa fa-angle-down"></i> -->
+      <input required [(ngModel)]="tx.display" #to="ngModel" name="to" id="to" class="form-control form-control-sm"
+        (click)="toggleDropDownTo()" autocomplete="off">
+      <i class="fa fa-angle-down" (click)="toggleDropDownTo()"></i>
+      <span *ngIf="to.errors?.incorrect"> {{translationService.isEn?
+            translationService.enMap['WRONGADDRESS']:translationService.cnMap['WRONGADDRESS']}}</span>
+      <!-- <datalist id="name-to">
+            <option  *ngFor="let account of accounts" [ngValue]="account" >{{account.name}}&nbsp;&nbsp;{{account.address}}</option>
+        </datalist> -->
+      <div class="data-container" *ngIf="showDropDownTo">
+=======
+      <input required [(ngModel)]="tx.display" #to="ngModel" name="to" id="to" class="form-control form-control-sm"
+        (click)="toggleDropDown()" autocomplete="off">
+      <i class="fa fa-angle-down" (click)="toggleDropDown()"></i>
+      <span *ngIf="to.errors?.incorrect"> {{translationService.isEn?
+            translationService.enMap['WRONGADDRESS']:translationService.cnMap['WRONGADDRESS']}}</span>
+      <div class="data-container" *ngIf="showDropDown">
+>>>>>>> origin/master
+        <p *ngFor="let account of accounts; 
+                       let i = index" class="data-list" (click)="updateTextBox(i)">
+          {{account.name}}&nbsp;-&nbsp;{{account.address | address:10:10}}&nbsp;-&nbsp;{{account.balance | number:'.2-2'}}
+          NBAI
+        </p>
+      </div>
+      <div class="form-control-feedback" *ngIf="to.errors?.required && (to.dirty || to.touched)">To Wallet Address is
+        required</div>
+      <div class="form-control-feedback" *ngIf="to.errors?.pattern && (to.dirty || to.touched)">To Wallet Address format
+        invalid</div>
+    </div>
+    <div class="form-group" [ngClass]="{'has-danger': amount.invalid && (amount.dirty || amount.touched ),
+                                          'has-success': amount.valid && (amount.dirty || amount.touched)}">
+      <label for="amount"> {{translationService.isEn?
+        translationService.enMap['AMOUNT']:translationService.cnMap['AMOUNT']}}*</label>
+      <input type="text" [(ngModel)]="tx.value" #amount="ngModel" name="amount" id="amount" maxlength="30" required
+        class="form-control form-control-sm" pattern="^\d+(?:\.\d{0,8})?[\s]{0,5}">
+      <span *ngIf="amount.errors?.pattern">{{translationService.isEn?
+            translationService.enMap['AMOUNTISNUMBER']:translationService.cnMap['AMOUNTISNUMBER']}}</span>
+      <span *ngIf="amount.errors?.incorrect"> {{translationService.isEn?
+        translationService.enMap['AMOUNTINVALID']:translationService.cnMap['AMOUNTINVALID']}}</span>
+    </div>
+    <div class="form-group" [ngClass]="{'has-danger': gasLimit.invalid && (gasLimit.dirty || gasLimit.touched ),
+                                  'has-success': gasLimit.valid && (gasLimit.dirty || gasLimit.touched)}">
+      <label for="gasLimit"> {{translationService.isEn?
+        translationService.enMap['GASLIMIT']:translationService.cnMap['GASLIMIT']}}*</label>
+      <input type="number" [(ngModel)]="tx.gasLimit" #gasLimit="ngModel" name="gasLimit" id="gasLimit" maxlength="7"
+        required class="form-control form-control-sm">
+      <span *ngIf="gasLimit.errors?.incorrect"> {{translationService.isEn?
+        translationService.enMap['GASLIMITMUST']:translationService.cnMap['GASLIMITMUST']}}</span>
+    </div>
+    <div class="form-group" [ngClass]="{'has-danger': gasPrice.invalid && (gasPrice.dirty || gasPrice.touched),
+                                  'has-success': gasPrice.valid && (gasPrice.dirty || gasPrice.touched)}">
+      <label for="gasPrice"> {{translationService.isEn?
+        translationService.enMap['GASPRICE']:translationService.cnMap['GASPRICE']}}*</label>
+      <input type="number" [(ngModel)]="tx.gasPrice" #gasPrice="ngModel" name="gasPrice" id="gasPrice" maxlength="5"
+        required class="form-control form-control-sm">
+    </div>
+    <div class="form-group">
+      <label for="note">
+        {{translationService.isEn? translationService.enMap['NOTE']:translationService.cnMap['NOTE']}}</label>
+      <textarea name="note" id="note" rows="3" [(ngModel)]="tx.data" #note></textarea>
+    </div>
+    <div class="form-group">
+      <button class="default" type="submit" [disabled]="editForm.form.invalid">
+        {{translationService.isEn? translationService.enMap['SEND']:translationService.cnMap['SEND']}}
+      </button>
+    </div>
+  </form>
+</div>
+<div class="popup transfer" id="popup" *ngIf="popupConfirm">
+  <form name="confirmForm" role="form" novalidate (ngSubmit)="confirm()" #confirmForm="ngForm">
+    <div class="modal-header">
+      <div class="modal-title" id="myUserLabel">
+        {{translationService.isEn? translationService.enMap['CONFIRMATION']:translationService.cnMap['CONFIRMATION']}}
+      </div>
+      <a href="javascript:;" data-dismiss="modal" aria-hidden="true" (click)="close()">&times;</a>
+    </div>
+    <div class="modal-body">
+      <div class="form-group" [ngClass]="{'has-danger': password.invalid && (password.dirty || password.touched ),
+                        'has-success': password.valid && (password.dirty || password.touched)}">
+        <div><label>{{translationService.isEn?
+            translationService.enMap['WALLETPASSWORD']:translationService.cnMap['WALLETPASSWORD']}}</label>
+        </div>
+        <input type="password" name="password" #password="ngModel" ngModel maxlength="30" required>
+        <span *ngIf="password.errors?.incorrect">{{errMsg}}
+        </span>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" [disabled]="confirmForm.form.invalid || loading" class="default">
+        {{translationService.isEn? translationService.enMap['CONFIRM']:translationService.cnMap['CONFIRM']}}
+      </button>
+<<<<<<< HEAD
+      <!-- <button (click)="close()">
+        {{translationService.isEn? translationService.enMap['BACK']:translationService.cnMap['BACK']}}
+      </button> -->
+=======
+>>>>>>> origin/master
+      <a href="javascript:;" data-dismiss="modal" aria-hidden="true" (click)="close()" class="button">
+        {{translationService.isEn? translationService.enMap['BACK']:translationService.cnMap['BACK']}}
+      </a>
+    </div>
+    <div class="loading" *ngIf="loading"></div>
+  </form>
+
+<<<<<<< HEAD
+</div>
+=======
+</div>
+>>>>>>> origin/master

@@ -1,0 +1,56 @@
+<div class="popup" id="popup">
+  <form name="editForm" role="form" novalidate (ngSubmit)="next()" #editForm="ngForm">
+
+    <div class="modal-header">
+      <div class="modal-title" id="myUserLabel">
+        {{translationService.isEn? translationService.enMap['ADD']:translationService.cnMap['ADD']}}</div>
+      <a href="javascript:;" data-dismiss="modal" aria-hidden="true" (click)="close()">&times;</a>
+    </div>
+    <div class="modal-body">
+      <div class="form-group" [ngClass]="{'has-danger': walletName.invalid && (walletName.dirty || walletName.touched ),
+                              'has-success': walletName.valid && (walletName.dirty || walletName.touched)}">
+        <div>
+          <label
+            for="walletName">{{translationService.isEn? translationService.enMap['WALLETNAME']:translationService.cnMap['WALLETNAME']}}</label>
+        </div>
+        <input name="walletName" #walletName="ngModel" ngModel maxlength="50" required>
+      </div>
+
+      <div class="form-group" [ngClass]="{'has-danger': password.invalid && (password.dirty || password.touched ),
+                              'has-success': password.valid && (password.dirty || password.touched)}">
+        <div>
+          <label
+            for="password">{{translationService.isEn? translationService.enMap['ENTER']:translationService.cnMap['ENTER']}}</label>
+        </div>
+        <input type="password" name="password" #password="ngModel" ngModel maxlength="30" required
+          pattern="^(?=.*\d)(?=.*[a-z]).{6,30}$">
+        <span
+          *ngIf="password.errors?.pattern && (password.dirty || password.touched )">{{translationService.isEn? translationService.enMap['PASSFORMAT']:translationService.cnMap['PASSFORMAT']}}</span>
+      </div>
+
+      <div class="form-group" [ngClass]="{'has-danger': rePassword.invalid && (rePassword.dirty || rePassword.touched ),
+                                'has-success': rePassword.valid && (rePassword.dirty || rePassword.touched)}">
+        <div>
+          <label
+            for="rePassword">{{translationService.isEn? translationService.enMap['REPEAT']:translationService.cnMap['REPEAT']}}</label>
+        </div>
+        <input type="password" name="rePassword" #rePassword="ngModel" ngModel maxlength="30" required
+          EqualValidator="password">
+        <span
+          *ngIf="rePassword.errors?.compare && (rePassword.dirty || rePassword.touched )">{{translationService.isEn? translationService.enMap['PASSWORDNOTMATCH']:translationService.cnMap['PASSWORDNOTMATCH']}}</span>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <div><span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <div class="btn">
+        <button type="submit" [disabled]="editForm.form.invalid" class="next">
+          {{translationService.isEn? translationService.enMap['NEXT']:translationService.cnMap['NEXT']}}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
