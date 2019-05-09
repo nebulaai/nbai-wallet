@@ -44,12 +44,6 @@
     "RECENT":"recent transactions",
     "NOTRANSACRTIONS":"You have no transactions yet",
     "TRANSACTIONHASH":"Transaction Hash",
-<<<<<<< HEAD
-    "IN":"IN",
-    "OUT":"OUT",
-    "SELF":"SELF",
-=======
->>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
     "WALLETER":"Wallet",
     "ACTION":" ",
     "VALUE":"Value",
