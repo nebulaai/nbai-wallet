@@ -61,6 +61,7 @@
           {{translationService.isEn? translationService.enMap['NOTRANSACRTIONS']:translationService.cnMap['NOTRANSACRTIONS']}}
         </p>
       </div>
+<<<<<<< HEAD
       <div class="transaction-content">
         <table class="results slide-m" [ngClass]="{'empty': transactions['length']===0}">
           <thead>
@@ -144,6 +145,66 @@
             </tr>
           </tbody>
         </table>
+=======
+      <div class="results slide-m" [ngClass]="{'empty': transactions['length']===0}">
+        <div class="header">
+          <div class="walleter field">
+            {{translationService.isEn? translationService.enMap['WALLETER']:translationService.cnMap['WALLETER']}}
+          </div>
+          <div class="action field">
+            {{translationService.isEn? translationService.enMap['ACTION']:translationService.cnMap['ACTION']}}
+          </div>
+          <div class="value field">
+            {{translationService.isEn? translationService.enMap['VALUE']:translationService.cnMap['VALUE']}}
+          </div>
+          <div class="from field">
+            {{translationService.isEn? translationService.enMap['FROM']:translationService.cnMap['FROM']}}
+          </div>
+          <div class="to field">
+            {{translationService.isEn? translationService.enMap['TO']:translationService.cnMap['TO']}}
+          </div>
+          <div class="time field">
+            {{translationService.isEn? translationService.enMap['TIME']:translationService.cnMap['TIME']}}
+          </div>
+          <div class="hash field">
+            {{translationService.isEn? translationService.enMap['TRANSACTIONHASH']:translationService.cnMap['TRANSACTIONHASH']}}
+          </div>
+        </div>
+        <div class="result" *ngFor="let transaction of transactions; let i = index">
+          <div class="walleter field">
+            {{transaction['name']}}
+          </div>
+          <div class="action field">
+            <div class="color-b">
+              <div class="color-in" *ngIf="transaction['type'] == 2" title="View completed Txns">IN</div>
+              <div class="color-out" *ngIf="transaction['type'] == 1" title="View completed Txns">OUT</div>
+              <div class="color-cir" *ngIf="transaction['type'] == 3" title="View completed Txns">SELF</div>
+              {{transaction.id}}
+            </div>
+          </div>
+          <div class="value field">
+            {{transaction['value'] | number:'.2-2'}} NBAI
+          </div>
+          <div class="from field">
+            <a href="{{scanUrl}}address/{{transaction['t_from']}}" target="_blank">
+              <span *ngIf="!transaction['fromNick']">{{transaction['t_from'] | address:10:10}}</span>
+              <span *ngIf="transaction['fromNick']">{{transaction['fromNick']}}</span>
+            </a>
+          </div>
+          <div class="to field">
+            <a href="{{scanUrl}}address/{{transaction['t_to']}}" target="_blank">
+              <span *ngIf="!transaction['toNick']">{{transaction['t_to'] | address:10:10}}</span>
+              <span *ngIf="transaction['toNick']">{{transaction['toNick']}}</span>
+            </a>
+          </div>
+          <div class="time field">
+            {{transaction['timestamp']*1000 | date}}
+          </div>
+          <div class="hash field">
+            <a href="{{scanUrl}}tx/{{transaction['hash']}}" target="_blank">{{transaction['hash'] | address:10:10}}</a>
+          </div>
+        </div>
+>>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
       </div>
     </div>
     <div class="transaction-more" *ngIf="isMore">
@@ -151,4 +212,8 @@
       <a href='https://scan.nbai.io' target='_blank'>NBAI
         {{translationService.isEn? translationService.enMap['EXPLORER']:translationService.cnMap['EXPLORER']}}</a></div>
   </div>
+<<<<<<< HEAD
 </div>
+=======
+</div>
+>>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9

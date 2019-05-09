@@ -16,6 +16,7 @@ export class TransferComponent implements OnInit {
   popupConfirm: boolean = false;
   errMsg: string;
   loading: boolean = false;
+<<<<<<< HEAD
   showDropDownFrom: boolean = false;
   showDropDownTo: boolean = false;
   counter: number;
@@ -26,11 +27,20 @@ export class TransferComponent implements OnInit {
 
   fromAddress: string;
   toAddress: string;
+=======
+  showDropDown: boolean = false;
+  counter: number;
+  transferAddress: string;
+  currentAccount: Account;
+  tx: any = { gasLimit: '21000', gasPrice: '10', to: '', value: '', data: '', display: '' };
+
+>>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
   private curAccount: Account;
   private txHash: string;
   constructor(private walletService: WalletService, private web3Service: Web3Service, private router: Router, public translationService: TranslationService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+<<<<<<< HEAD
 
     this.route.queryParams.subscribe(
       params => {
@@ -72,6 +82,19 @@ export class TransferComponent implements OnInit {
             }
           );
         }
+=======
+    this.route.queryParams.subscribe(
+      params => {
+        this.transferAddress = params['address'];
+        this.walletService.getAccounts().subscribe(
+          (wallet: Account[]) => {
+            if (wallet.length) {
+              this.accounts = wallet;
+              this.currentAccount = wallet.filter(w => w.address == this.transferAddress)[0];
+            }
+          }
+        );
+>>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
       }
     )
   }
@@ -148,11 +171,16 @@ export class TransferComponent implements OnInit {
   }
 
 
+<<<<<<< HEAD
   toggleDropDownFrom(): void {
     this.showDropDownFrom = !this.showDropDownFrom;
   }
   toggleDropDownTo(): void {
     this.showDropDownTo = !this.showDropDownTo;
+=======
+  toggleDropDown(): void {
+    this.showDropDown = !this.showDropDown;
+>>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
   }
 
   private updateTextBox(index): void {
@@ -160,7 +188,11 @@ export class TransferComponent implements OnInit {
     // console.log('account', account);
     this.tx.to = account.address;
     this.tx.display = account.name + '  ' + this.filter(account.address, 10, 10) + '  ' + Number(account.balance).toFixed(2) + ' NBAI';
+<<<<<<< HEAD
     this.showDropDownTo = false;
+=======
+    this.showDropDown = false;
+>>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
   }
 
   private filter(str: string, first: number, last: number): string {
