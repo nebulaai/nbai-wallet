@@ -17,19 +17,11 @@
       <label for="to">
         {{translationService.isEn? translationService.enMap['TO']:translationService.cnMap['TO']}}*</label>
       <input required [(ngModel)]="tx.display" #to="ngModel" name="to" id="to" class="form-control form-control-sm"
-<<<<<<< HEAD
-        (click)="toggleDropDownTo()" autocomplete="off">
-      <i class="fa fa-angle-down" (click)="toggleDropDownTo()"></i>
-      <span *ngIf="to.errors?.incorrect"> {{translationService.isEn?
-            translationService.enMap['WRONGADDRESS']:translationService.cnMap['WRONGADDRESS']}}</span>
-      <div class="data-container" *ngIf="showDropDownTo">
-=======
         (click)="toggleDropDown()" autocomplete="off">
       <i class="fa fa-angle-down" (click)="toggleDropDown()"></i>
       <span *ngIf="to.errors?.incorrect"> {{translationService.isEn?
             translationService.enMap['WRONGADDRESS']:translationService.cnMap['WRONGADDRESS']}}</span>
       <div class="data-container" *ngIf="showDropDown">
->>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
         <p *ngFor="let account of accounts; 
                        let i = index" class="data-list" (click)="updateTextBox(i)">
           {{account.name}}&nbsp;-&nbsp;{{account.address | address:10:10}}&nbsp;-&nbsp;{{account.balance | number:'.2-2'}}
