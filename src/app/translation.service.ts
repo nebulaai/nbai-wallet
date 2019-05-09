@@ -49,6 +49,12 @@ export class TranslationService {
     "RECENT":"recent 20 transactions",
     "NOTRANSACRTIONS":"You have no transactions yet",
     "TRANSACTIONHASH":"Transaction Hash",
+<<<<<<< HEAD
+    "IN":"IN",
+    "OUT":"OUT",
+    "SELF":"SELF",
+=======
+>>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
     "WALLETER":"Wallet",
     "ACTION":" ",
     "VALUE":"Value",
@@ -64,6 +70,10 @@ export class TranslationService {
     "GASPRICE":"Gas Price (in Gwei)",
     "NOTE": "Note", 
     "SEND":"Send",
+<<<<<<< HEAD
+    "SENDNBAI":"Send NBAI",
+=======
+>>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
     "CONFIRMATION":"CONFIRMATION",
     "WALLETPASSWORD":"Wallet Password",
     "CONFIRM":"Confirm",
@@ -144,6 +154,12 @@ export class TranslationService {
     "ACTION":" ",
     "VALUE":"Value",
     "TRANSACTIONHASH":"交易hash",
+<<<<<<< HEAD
+    "IN": "转入",
+    "OUT": "转出",
+    "SELF": "SELF",
+=======
+>>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
     "FROM":"来自",
     "TO":"发给",
     "TIME":"时间",

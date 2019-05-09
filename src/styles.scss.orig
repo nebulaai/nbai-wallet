@@ -242,15 +242,9 @@ body{
                                 text-decoration: underline;
                             }
                         }
-<<<<<<< HEAD
                         // &:hover{
                             // border-left: 3px solid $lightPurple;
                         // }
-=======
-                        &:hover{
-                            
-                        }
->>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
                     }
                 }
             }
@@ -428,20 +422,13 @@ body{
                         }
                     }
                     div.transactions{
-<<<<<<< HEAD
-=======
-                        
->>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
                         width: 100%;
                         margin: 0 4rem;
                         color: #565656;
                         background: #fff;
                         margin-bottom: 4rem;
                         font-size: 0.8rem;
-<<<<<<< HEAD
                         overflow: hidden;
-=======
->>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
                         .transaction-header{
                             padding: 1rem;
                             border-bottom: 1px solid #b2b2b2;
@@ -481,17 +468,13 @@ body{
                             }
                         }
                         .transaction-body{
-<<<<<<< HEAD
                            width: 100%;
-=======
->>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
                             .notice{
                                 padding: 1rem 0;
                                 img{
                                     width: 100px;
                                 }
                             }
-<<<<<<< HEAD
                             .transaction-content{
                                 width: 100%;
                                 
@@ -601,64 +584,6 @@ body{
                                             background: #f7f7f7;
                                         }
 
-=======
-                            .results{
-                                .header, .result{
-                                    display: flex;
-                                    flex-wrap: wrap;
-                                    height: 2rem;
-                                    .field{
-                                        width: 15%;
-                                        padding: 0.4rem 0;
-                                        a{
-                                            span{
-                                                color: #565656; 
-                                            }
-                                        }
-                                        &.time{
-                                            width: 10%;
-                                        }
-                                        &.action{
-                                            width: 3%;
-                                            div{
-                                                border-radius: .4rem;
-                                                color: #fff;
-                                                font-weight: 400;
-                                                font-size: 0.8rem;
-                                                margin: 0 0.2rem;
-                                            }
-                                            .color-b{
-                                                width: 3rem;
-                                                .color-in{
-                                                    background-color: #5cb85c;
-                                                }
-                                                .color-out{
-                                                    background-color: #e67e22;                                               
-                                                }
-                                                .color-cir{
-                                                    background-color: #7c42ef;   
-                                                }
-                                                .color-same{
-                                                    background-color: #e20d8a;   
-                                                }
-                                            }
-                                            
-                                        }
-                                        &.hash{
-                                            width: 27%;
-                                            a{
-                                                color: #565656;
-                                            }
-                                        }
-                                    }
-                                }
-                                .header{
-                                    color: #a4a4ff;
-                                }
-                                .result{
-                                    &:nth-child(2n){
-                                        background: #f7f7f7;
->>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
                                     }
                                 }
                             }
@@ -789,38 +714,28 @@ body{
                             input, select, textarea{
                                 width: 100%;
                                 border-radius: 0;  
-<<<<<<< HEAD
                                 &.frominput{
                                     height: 2rem;
                                     position: relative;
                                     top: -2rem;
                                     z-index: 2;
                                 }
-=======
->>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
                             }
                             i{
                                 font-weight: 800;
                                 font-size: 1rem;
                                 position: relative;
                                 float: right;
-<<<<<<< HEAD
                                 top: -1.5rem;
-=======
-                                top: -1.6rem;
->>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
                                 right: 0.8rem;
                                 color: #000;
                                 @media (max-width: 767px) {
                                     right: 0.5rem;
                                 }
-<<<<<<< HEAD
                                 &.fromsign{
                                     z-index: 3;
                                     top: -3.5rem;
                                 }
-=======
->>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
                             }
                             button{
                                 @include btn(200px, 2.5rem, 15px);
@@ -874,10 +789,7 @@ body{
     }
 
     div.popup{
-<<<<<<< HEAD
         z-index: 4;
-=======
->>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
         position: fixed;
         top: 0;
         left: 0;
@@ -1475,7 +1387,6 @@ body{
                     
                 }
             }
-<<<<<<< HEAD
             &.createForm{
                 .body{
                     .row{
@@ -1657,8 +1568,6 @@ body{
                     }
                 }
             }
-=======
->>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
         }
     }
     
@@ -1704,11 +1613,7 @@ body{
                             svg{
                                 width:20px;
                             }
-<<<<<<< HEAD
-                            div.text{font-size: 14px;}
-=======
                             div.text{font-size: 14px;;}
->>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
                         }
                     }
                     li.wallet-link{
@@ -1774,13 +1679,8 @@ div.has-danger{
     input, select, textarea{ border: 1px solid #fff; 
         background: #fff5f5;
     }
-<<<<<<< HEAD
     // label{
     // }
-=======
-    label{
-    }
->>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
     span {
         color: #d10000;
         font-size: 12px;

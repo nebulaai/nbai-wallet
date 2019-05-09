@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Web3Service } from '../../web3.service';
 =======
 import { Router } from '@angular/router';
->>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
+>>>>>>> origin/master
 import { EventEmitter } from 'events';
 import { environment } from '../../../environments/environment';
 import { TranslationService } from '../../translation.service';
@@ -38,7 +38,7 @@ export class MainComponent implements OnInit {
     private router: Router,
     public translationService: TranslationService) {
   }
->>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
+>>>>>>> origin/master
 
   ngOnInit() {
 

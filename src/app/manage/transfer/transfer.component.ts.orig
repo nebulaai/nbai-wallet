@@ -4,6 +4,8 @@ import { Account } from '../../account';
 import { Web3Service } from '../../web3.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslationService } from '../../translation.service';
+import { text } from '@angular/core/src/render3/instructions';
+// import { SrvRecord } from 'dns';
 @Component({
   selector: 'app-transfer',
   templateUrl: './transfer.component.html',
@@ -16,7 +18,6 @@ export class TransferComponent implements OnInit {
   popupConfirm: boolean = false;
   errMsg: string;
   loading: boolean = false;
-<<<<<<< HEAD
   showDropDownFrom: boolean = false;
   showDropDownTo: boolean = false;
   counter: number;
@@ -24,23 +25,15 @@ export class TransferComponent implements OnInit {
   currentAccount: Account;
   fx: any = { gasLimit: '21000', gasPrice: '10', from: '', value: '', data: '', display: '' };
   tx: any = { gasLimit: '21000', gasPrice: '10', to: '', value: '', data: '', display: '' };
+  // needInput: boolean = true;
 
   fromAddress: string;
   toAddress: string;
-=======
-  showDropDown: boolean = false;
-  counter: number;
-  transferAddress: string;
-  currentAccount: Account;
-  tx: any = { gasLimit: '21000', gasPrice: '10', to: '', value: '', data: '', display: '' };
-
->>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
   private curAccount: Account;
   private txHash: string;
   constructor(private walletService: WalletService, private web3Service: Web3Service, private router: Router, public translationService: TranslationService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-<<<<<<< HEAD
 
     this.route.queryParams.subscribe(
       params => {
@@ -82,24 +75,36 @@ export class TransferComponent implements OnInit {
             }
           );
         }
-=======
-    this.route.queryParams.subscribe(
-      params => {
-        this.transferAddress = params['address'];
-        this.walletService.getAccounts().subscribe(
-          (wallet: Account[]) => {
-            if (wallet.length) {
-              this.accounts = wallet;
-              this.currentAccount = wallet.filter(w => w.address == this.transferAddress)[0];
-            }
-          }
-        );
->>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
       }
     )
+<<<<<<< HEAD
+    // this.address = this.route.snapshot.paramMap.get('address');   //console.log('address', address);
+    // this.walletService.getAccounts().subscribe(
+    //   (wallet: Account[]) => {
+    //     if (wallet.length){
+    //       this.accounts = wallet;
+    //     } 
+    //   }
+    // );
+=======
+>>>>>>> origin/master
   }
 
-
+  // value = '';
+  // onEnter(value: string) {
+  //   this.value = value;
+  //   // console.log('asas', this.value);
+  //   this.walletService.getAccounts().subscribe(
+  //     (wallet: Account[]) => {
+  //       if (wallet.length) {
+  //         this.accounts = wallet;
+  //         this.currentAccount = wallet.filter(w => w.address == this.value)[0];
+  //         // console.log('adass',this.currentAccount);
+  //         this.fx['display'] = this.value;
+  //       }
+  //     }
+  //   );
+  // }
 
   selectAccount() {
   }
@@ -107,16 +112,38 @@ export class TransferComponent implements OnInit {
     this.popupConfirm = false;
   }
   submit() {
+<<<<<<< HEAD
+    console.log('from', this.form.value);
+=======
+>>>>>>> origin/master
     this.curAccount = <Account>this.form.value['account'];
     if (this.form.valid) {
       if (this.tx.display.indexOf(' ') == -1) {
         this.tx.to = this.tx.display;
       }
+      // if (this.fx.display.indexOf(' ') == -1) {
+      //   this.fx.from = this.fx.display;
+      // }
       this.tx.to = this.tx.to.toLowerCase().indexOf('0x') == 0 ? this.tx.to.trim() : '0x' + this.tx.to.trim();
       if (!this.web3Service.checkAddress(this.tx.to)) {
         this.form.controls['to'].setErrors({ 'incorrect': true });
         return false;
       }
+      // this.fx.from = this.fx.from.toLowerCase().indexOf('0x') == 0 ? this.fx.from.trim() : '0x' + this.fx.from.trim();
+      // if (!this.web3Service.checkAddress(this.fx.from)) {
+      //   this.form.controls['from'].setErrors({ 'incorrect': true });
+      //   return false;
+      // }
+
+      // this.value = this.value.toLowerCase().indexOf('0x') == 0 ? this.value.trim() : '0x' + this.value.trim();
+      // console.log('cva',this.value);
+      // if (!this.web3Service.checkAddress(this.value)) {
+      //   console.log('adsdsa', this.web3Service.checkAddress(this.value));
+      //   this.form.controls['from'].setErrors({ 'incorrect': true });
+      //   return false;
+      // }
+
+
       const amount: number = <number>this.form.value['amount'];
       if (amount > Number(this.curAccount['balance'])) {
         this.form.controls['amount'].setErrors({ 'incorrect': true })
@@ -171,16 +198,11 @@ export class TransferComponent implements OnInit {
   }
 
 
-<<<<<<< HEAD
   toggleDropDownFrom(): void {
     this.showDropDownFrom = !this.showDropDownFrom;
   }
   toggleDropDownTo(): void {
     this.showDropDownTo = !this.showDropDownTo;
-=======
-  toggleDropDown(): void {
-    this.showDropDown = !this.showDropDown;
->>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
   }
 
   private updateTextBox(index): void {
@@ -188,11 +210,7 @@ export class TransferComponent implements OnInit {
     // console.log('account', account);
     this.tx.to = account.address;
     this.tx.display = account.name + '  ' + this.filter(account.address, 10, 10) + '  ' + Number(account.balance).toFixed(2) + ' NBAI';
-<<<<<<< HEAD
     this.showDropDownTo = false;
-=======
-    this.showDropDown = false;
->>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
   }
 
   private filter(str: string, first: number, last: number): string {

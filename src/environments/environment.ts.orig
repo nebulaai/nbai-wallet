@@ -1,0 +1,25 @@
+// The file contents for the current environment will overwrite these during build.
+// The build system defaults to the dev environment which uses `environment.ts`, but if you do
+// `ng build --env=prod` then `environment.prod.ts` will be used instead.
+// The list of which env maps to which file can be found in `.angular-cli.json`.
+
+export const environment = {
+  production: true, 
+  // network: "https://ropsten.infura.io/DJoYquKpWY6GJtvQRuV9",
+  // network: "http://54.214.92.248:8051",
+
+  // network: "https://api.nbai.io",
+  network: "http://192.168.88.217:8545",
+<<<<<<< HEAD
+  // apiUrl: 'http://192.168.88.216:8080/browserrest',
+  apiUrl: "https://scan.nbai.io/browserrest",
+=======
+  apiUrl: 'http://192.168.88.216:8080/browserrest',
+  // apiUrl: "https://scan.nbai.io/browserrest",
+>>>>>>> origin/master
+
+
+  // network: "http://testnet.nebula-ai.com:8545"
+  scanUrl: 'http://192.168.88.216:8080/NBAITestExploer/#/'
+  // scanUrl: 'https://scan.nbai.io/#/'
+};

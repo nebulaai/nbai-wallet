@@ -9,6 +9,15 @@
         <option *ngFor="let account of accounts" [ngValue]="account">{{account.name}}&nbsp;-&nbsp;{{account.address |
           address:10:10}}&nbsp;-&nbsp;{{account.balance | number:'.2-2'}} NBAI</option>
       </select>
+<<<<<<< HEAD
+
+      <!-- <input required #addFrom (keyup)="onEnter(addFrom.value)" name="from" id="from"
+        class="form-control form-control-sm frominput" *ngIf="needInput" (click)="toggleDropDownFrom()"
+        autocomplete="off">
+      <i class="fa fa-angle-down fromsign" (click)="toggleDropDownFrom()" *ngIf="needInput"></i> -->
+
+=======
+>>>>>>> origin/master
       <div class="form-control-feedback" *ngIf="account.invalid&&(account.dirty || account.touched)">Wallet Address is
         required</div>
     </div>
@@ -16,20 +25,27 @@
                                           'has-success': to.valid && (to.dirty || to.touched)}">
       <label for="to">
         {{translationService.isEn? translationService.enMap['TO']:translationService.cnMap['TO']}}*</label>
-      <input required [(ngModel)]="tx.display" #to="ngModel" name="to" id="to" class="form-control form-control-sm"
 <<<<<<< HEAD
+      <!-- <input  required [(ngModel)]="tx.to" #to="ngModel" name="to"  id="to" class="form-control form-control-sm" list="name-to" autocomplete="off"
+        style="overflow: hidden; text-overflow: ellipsis; padding-right: 10rem; white-space: nowrap;">
+        <i class="fa fa-angle-down"></i> -->
+      <input required [(ngModel)]="tx.display" #to="ngModel" name="to" id="to" class="form-control form-control-sm"
         (click)="toggleDropDownTo()" autocomplete="off">
       <i class="fa fa-angle-down" (click)="toggleDropDownTo()"></i>
       <span *ngIf="to.errors?.incorrect"> {{translationService.isEn?
             translationService.enMap['WRONGADDRESS']:translationService.cnMap['WRONGADDRESS']}}</span>
+      <!-- <datalist id="name-to">
+            <option  *ngFor="let account of accounts" [ngValue]="account" >{{account.name}}&nbsp;&nbsp;{{account.address}}</option>
+        </datalist> -->
       <div class="data-container" *ngIf="showDropDownTo">
 =======
+      <input required [(ngModel)]="tx.display" #to="ngModel" name="to" id="to" class="form-control form-control-sm"
         (click)="toggleDropDown()" autocomplete="off">
       <i class="fa fa-angle-down" (click)="toggleDropDown()"></i>
       <span *ngIf="to.errors?.incorrect"> {{translationService.isEn?
             translationService.enMap['WRONGADDRESS']:translationService.cnMap['WRONGADDRESS']}}</span>
       <div class="data-container" *ngIf="showDropDown">
->>>>>>> 18ec62eb8acb39b975e60d24909df21fd721b0a9
+>>>>>>> origin/master
         <p *ngFor="let account of accounts; 
                        let i = index" class="data-list" (click)="updateTextBox(i)">
           {{account.name}}&nbsp;-&nbsp;{{account.address | address:10:10}}&nbsp;-&nbsp;{{account.balance | number:'.2-2'}}
@@ -103,6 +119,12 @@
       <button type="submit" [disabled]="confirmForm.form.invalid || loading" class="default">
         {{translationService.isEn? translationService.enMap['CONFIRM']:translationService.cnMap['CONFIRM']}}
       </button>
+<<<<<<< HEAD
+      <!-- <button (click)="close()">
+        {{translationService.isEn? translationService.enMap['BACK']:translationService.cnMap['BACK']}}
+      </button> -->
+=======
+>>>>>>> origin/master
       <a href="javascript:;" data-dismiss="modal" aria-hidden="true" (click)="close()" class="button">
         {{translationService.isEn? translationService.enMap['BACK']:translationService.cnMap['BACK']}}
       </a>
@@ -110,4 +132,8 @@
     <div class="loading" *ngIf="loading"></div>
   </form>
 
+<<<<<<< HEAD
 </div>
+=======
+</div>
+>>>>>>> origin/master
