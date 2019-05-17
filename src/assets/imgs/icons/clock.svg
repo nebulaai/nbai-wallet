@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Svg Vector Icons : http://www.onlinewebfonts.com/icon -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
 <g><path d="M569.8,80C337.6,80,150,268.1,150,500H10l181.8,181.8l3.3,6.8L383.3,500h-140c0-180.4,146.3-326.7,326.7-326.7c180.4,0,326.7,146.3,326.7,326.7c0,180.4-146.3,326.7-326.7,326.7c-90.3,0-171.7-36.9-230.8-95.9l-66,66C349,872.9,453.8,920,569.8,920C801.9,920,990,731.9,990,500C990,268.1,801.9,80,569.8,80z M523.3,313.3v233.3l199.7,118.5l33.6-56.7l-163.3-96.8V313.3H523.3z"/></g>
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Svg Vector Icons : http://www.onlinewebfonts.com/icon -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
+<g><path d="M569.8,80C337.6,80,150,268.1,150,500H10l181.8,181.8l3.3,6.8L383.3,500h-140c0-180.4,146.3-326.7,326.7-326.7c180.4,0,326.7,146.3,326.7,326.7c0,180.4-146.3,326.7-326.7,326.7c-90.3,0-171.7-36.9-230.8-95.9l-66,66C349,872.9,453.8,920,569.8,920C801.9,920,990,731.9,990,500C990,268.1,801.9,80,569.8,80z M523.3,313.3v233.3l199.7,118.5l33.6-56.7l-163.3-96.8V313.3H523.3z"/></g>
+>>>>>>> 05d997cd5e6a0ec5050ff5b59d7e600f3fb3d2ba
 </svg>

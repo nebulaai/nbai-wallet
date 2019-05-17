@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { Observable } from 'rxjs';
 import { Account } from './account';
+import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 declare let require: any;
 declare let window: any;
@@ -17,14 +19,21 @@ const NETWORK = environment.network;
 export class Web3Service {
   private web3: any = window.web3;
   public txHash: string = '';
-
+  private note: Subject<string> = new BehaviorSubject<string>(environment.network);
+  noteAddress$ = this.note.asObservable();
 
   constructor() {
-    this.web3 = new Web3(NETWORK);
+    this.web3 = new Web3(this.note['_value']);
+  }
+
+  setNode(data: string): void {
+    this.note.next(data);
+    // console.log('new', this.note['_value']);
+    this.web3 = new Web3(this.note['_value']);
   }
 
   importWallet(keystore: Object, password: string): any {
-    const wallet = this.web3.eth.accounts.decrypt(keystore, password);     
+    const wallet = this.web3.eth.accounts.decrypt(keystore, password);
     return wallet;
   }
 
@@ -55,7 +64,7 @@ export class Web3Service {
         value: this.web3.utils.toHex(this.web3.utils.toWei(etx['value'], 'ether')),
         gasLimit: this.web3.utils.toHex(etx['gasLimit']),
         gasPrice: this.web3.utils.toHex(this.web3.utils.toWei(etx['gasPrice'] + '', 'gwei'))
-      };                            
+      };
       const tx = new Tx(txObject);
       const key = new Buffer(privateKey, 'hex');
       tx.sign(key);
@@ -88,11 +97,11 @@ export class Web3Service {
 
     let hdwallet = hdkey.fromMasterSeed(bip39.mnemonicToSeed(seed));
     let wallet_hdpath = "m/44'/60'/0'/0/";
-    const key = hdwallet.derivePath("m/44'/60'/0'/0/0"); 
+    const key = hdwallet.derivePath("m/44'/60'/0'/0/0");
 
-    const address = util.pubToAddress(key._hdkey._publicKey, true); 
-    const addressHex = util.toChecksumAddress(address.toString('hex'));     
-    const privateKey = util.bufferToHex(key._hdkey._privateKey);    
+    const address = util.pubToAddress(key._hdkey._publicKey, true);
+    const addressHex = util.toChecksumAddress(address.toString('hex'));
+    const privateKey = util.bufferToHex(key._hdkey._privateKey);
 
     let accounts = [];
     for (let i = startingPosition; i < startingPosition + 8; i++) {

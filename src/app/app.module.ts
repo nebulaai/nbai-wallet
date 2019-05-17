@@ -58,7 +58,7 @@ import { TranslationService } from './translation.service';
     QRCodeModule,
     HttpClientModule,
     AngularFontAwesomeModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
   ],
   providers: [WalletService, Web3Service, TranslationService],
   bootstrap: [AppComponent]

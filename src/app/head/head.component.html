@@ -5,6 +5,10 @@
         <img src="assets/imgs/icons/wallet_logo_blk.png" alt="NBAI Wallet" id="logo" />
       </a>
     </div>
+    <div class = "network"  (click)="showPopup = true">
+        <span class="node">{{translationService.isEn? translationService.enMap['NETWORK']:translationService.cnMap['NETWORK']}}</span>
+        <i class="fa fa-cog config"></i>
+    </div>
     <div class="download">
       <a href="https://github.com/nebulaai/nbai-wallet/releases" target="_blank">
         {{translationService.isEn? translationService.enMap['OFFLINEVERSION']:translationService.cnMap['OFFLINEVERSION']}}
@@ -21,3 +25,17 @@
     </div>
   </div>
 </header>
+
+<div class="lightbox" id="lightbox" *ngIf = "showPopup">
+  <div class="lightbox-content">
+    <div id="close" (click)="showPopup = false" class="dark-blue"><i class="fa fa-times"></i></div>
+    <div class = "inside">
+        <h3 class="dark-blue text-left">{{translationService.isEn? translationService.enMap['NETWORK']:translationService.cnMap['NETWORK']}}</h3>
+        <p><b>{{translationService.isEn? translationService.enMap['NODE']:translationService.cnMap['NODE']}}</b></p>
+        <input type="text" class="node" [(ngModel)]="nodeAddress" (keyup) = "checkNote()" [ngClass] = "{'invalid': !validNode}">
+        <div *ngIf = "!validNode" class = "error">Invalid node address</div>
+        <a class="confirm" (click)="validNode && setNode();" [ngClass] = "{'disabled': !validNode}">Confirm</a>
+        <a class="cancel" (click)="showPopup = false">Cancel</a>
+    </div>
+  </div>
+</div>
