@@ -17,11 +17,11 @@
       <label for="to">
         {{translationService.isEn? translationService.enMap['TO']:translationService.cnMap['TO']}}*</label>
       <input required [(ngModel)]="tx.display" #to="ngModel" name="to" id="to" class="form-control form-control-sm"
-        (click)="toggleDropDown()" autocomplete="off">
-      <i class="fa fa-angle-down" (click)="toggleDropDown()"></i>
+        (click)="toggleDropDownTo()" autocomplete="off">
+      <i class="fa fa-angle-down" (click)="toggleDropDownTo()"></i>
       <span *ngIf="to.errors?.incorrect"> {{translationService.isEn?
             translationService.enMap['WRONGADDRESS']:translationService.cnMap['WRONGADDRESS']}}</span>
-      <div class="data-container" *ngIf="showDropDown">
+      <div class="data-container" *ngIf="showDropDownTo">
         <p *ngFor="let account of accounts; 
                        let i = index" class="data-list" (click)="updateTextBox(i)">
           {{account.name}}&nbsp;-&nbsp;{{account.address | address:10:10}}&nbsp;-&nbsp;{{account.balance | number:'.2-2'}}
@@ -48,7 +48,7 @@
                                   'has-success': gasLimit.valid && (gasLimit.dirty || gasLimit.touched)}">
       <label for="gasLimit"> {{translationService.isEn?
         translationService.enMap['GASLIMIT']:translationService.cnMap['GASLIMIT']}}*</label>
-      <input type="number" [(ngModel)]="tx.gasLimit" #gasLimit="ngModel" name="gasLimit" id="gasLimit" maxlength="7"
+      <input type="text" [(ngModel)]="tx.gasLimit" #gasLimit="ngModel" name="gasLimit" id="gasLimit" maxlength="7" pattern="^[1-9]\d*$"
         required class="form-control form-control-sm">
       <span *ngIf="gasLimit.errors?.incorrect"> {{translationService.isEn?
         translationService.enMap['GASLIMITMUST']:translationService.cnMap['GASLIMITMUST']}}</span>
@@ -57,7 +57,7 @@
                                   'has-success': gasPrice.valid && (gasPrice.dirty || gasPrice.touched)}">
       <label for="gasPrice"> {{translationService.isEn?
         translationService.enMap['GASPRICE']:translationService.cnMap['GASPRICE']}}*</label>
-      <input type="number" [(ngModel)]="tx.gasPrice" #gasPrice="ngModel" name="gasPrice" id="gasPrice" maxlength="5"
+      <input type="text" [(ngModel)]="tx.gasPrice" #gasPrice="ngModel" name="gasPrice" id="gasPrice" maxlength="5" pattern="^[1-9]\d*$"
         required class="form-control form-control-sm">
     </div>
     <div class="form-group">

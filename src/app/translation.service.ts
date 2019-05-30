@@ -49,6 +49,9 @@ export class TranslationService {
     "RECENT":"recent 20 transactions",
     "NOTRANSACRTIONS":"You have no transactions yet",
     "TRANSACTIONHASH":"Transaction Hash",
+    "IN":"IN",
+    "OUT":"OUT",
+    "SELF":"SELF",
     "WALLETER":"Wallet",
     "ACTION":" ",
     "VALUE":"Value",
@@ -64,6 +67,7 @@ export class TranslationService {
     "GASPRICE":"Gas Price (in Gwei)",
     "NOTE": "Note", 
     "SEND":"Send",
+    "SENDNBAI":"Send NBAI",
     "CONFIRMATION":"CONFIRMATION",
     "WALLETPASSWORD":"Wallet Password",
     "CONFIRM":"Confirm",
@@ -94,7 +98,9 @@ export class TranslationService {
     "TOKENSWAP": "Token Swap",
     "IMPORTMNEMONIC":"Mnemonic",
     "ENTERMNEMONIC":"Enter Mnemonic",
-    "IMPORT": "Import"
+    "IMPORT": "Import",
+    "NETWORK": "Network",
+    "NODE": "Blockchain full node address"
 };
 
    cnMap={
@@ -144,6 +150,9 @@ export class TranslationService {
     "ACTION":" ",
     "VALUE":"Value",
     "TRANSACTIONHASH":"交易hash",
+    "IN": "转入",
+    "OUT": "转出",
+    "SELF": "SELF",
     "FROM":"来自",
     "TO":"发给",
     "TIME":"时间",
@@ -186,7 +195,9 @@ export class TranslationService {
     "TOKENSWAP": "主网映射",
     "IMPORTMNEMONIC":"用助记词导入",
     "ENTERMNEMONIC":"请输入助记词",
-    "IMPORT": "导入钱包"
+    "IMPORT": "导入钱包",
+    "NETWORK": "网络",
+    "NODE": "全节点地址"
 };
 
   constructor() {}

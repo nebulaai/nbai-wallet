@@ -16,28 +16,62 @@ export class TransferComponent implements OnInit {
   popupConfirm: boolean = false;
   errMsg: string;
   loading: boolean = false;
-  showDropDown: boolean = false;
+  showDropDownFrom: boolean = false;
+  showDropDownTo: boolean = false;
   counter: number;
   transferAddress: string;
   currentAccount: Account;
+  fx: any = { gasLimit: '21000', gasPrice: '10', from: '', value: '', data: '', display: '' };
   tx: any = { gasLimit: '21000', gasPrice: '10', to: '', value: '', data: '', display: '' };
 
+  fromAddress: string;
+  toAddress: string;
   private curAccount: Account;
   private txHash: string;
   constructor(private walletService: WalletService, private web3Service: Web3Service, private router: Router, public translationService: TranslationService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+
     this.route.queryParams.subscribe(
       params => {
-        this.transferAddress = params['address'];
-        this.walletService.getAccounts().subscribe(
-          (wallet: Account[]) => {
-            if (wallet.length) {
-              this.accounts = wallet;
-              this.currentAccount = wallet.filter(w => w.address == this.transferAddress)[0];
+        if (params['address']) {
+          this.transferAddress = params['address'];
+          this.walletService.getAccounts().subscribe(
+            (wallet: Account[]) => {
+              if (wallet.length) {
+                this.accounts = wallet;
+                this.currentAccount = wallet.filter(w => w.address == this.transferAddress)[0];
+                // this.needInput = false;
+              }
             }
-          }
-        );
+          );
+        } else if (params['addressFrom']) {
+          this.transferAddress = params['addressFrom'];
+          this.walletService.getAccounts().subscribe(
+            (wallet: Account[]) => {
+              if (wallet.length) {
+                this.accounts = wallet;
+                this.currentAccount = wallet.filter(w => w.address == this.transferAddress)[0];
+                // console.log('ada', this.currentAccount);                
+                // this.needInput = false;
+              }
+            }
+          );
+          // if (params['nameTo'] == undefined) {
+            this.tx['display'] = params['addressTo'];
+          // } 
+        }
+        else {
+          this.walletService.getAccounts().subscribe(
+            (wallet: Account[]) => {
+              if (wallet.length) {
+                this.accounts = wallet;
+                // this.currentAccount = wallet.filter(w => w.address == this.transferAddress)[0];              
+                // this.needInput = false;
+              }
+            }
+          );
+        }
       }
     )
   }
@@ -114,8 +148,11 @@ export class TransferComponent implements OnInit {
   }
 
 
-  toggleDropDown(): void {
-    this.showDropDown = !this.showDropDown;
+  toggleDropDownFrom(): void {
+    this.showDropDownFrom = !this.showDropDownFrom;
+  }
+  toggleDropDownTo(): void {
+    this.showDropDownTo = !this.showDropDownTo;
   }
 
   private updateTextBox(index): void {
@@ -123,7 +160,7 @@ export class TransferComponent implements OnInit {
     // console.log('account', account);
     this.tx.to = account.address;
     this.tx.display = account.name + '  ' + this.filter(account.address, 10, 10) + '  ' + Number(account.balance).toFixed(2) + ' NBAI';
-    this.showDropDown = false;
+    this.showDropDownTo = false;
   }
 
   private filter(str: string, first: number, last: number): string {

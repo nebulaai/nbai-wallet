@@ -1,7 +1,8 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { WalletService } from '../../wallet.service';
 import { Account } from '../../account';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Web3Service } from '../../web3.service';
 import { EventEmitter } from 'events';
 import { environment } from '../../../environments/environment';
 import { TranslationService } from '../../translation.service';
@@ -21,10 +22,12 @@ export class MainComponent implements OnInit {
   scanUrl: String = environment.scanUrl;
 
   @Output() open = new EventEmitter();
-  constructor(private walletService: WalletService,
-    private router: Router,
-    public translationService: TranslationService) {
-  }
+  constructor(private route: ActivatedRoute, 
+              private walletService: WalletService, 
+              private web3Service: Web3Service, 
+              private router: Router,
+              public translationService: TranslationService) { 
+              }
 
   ngOnInit() {
 

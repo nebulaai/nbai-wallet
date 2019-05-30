@@ -28,7 +28,7 @@
             <label class="subtitle" for="keystore">{{translationService.isEn?
               translationService.enMap['PLEASEKEYSTORE']:translationService.cnMap['PLEASEKEYSTORE']}}</label>
             <div class="input-file-container js">
-              <input class="input-file" id="my-file" type="file" name="keystore" id="keystore" ngModel
+              <input class="input-file" type="file" name="keystore" id="keystore" ngModel
                 #keystore="ngModel" (change)="handleFileInput($event.target.files)">
               <label tabindex="0" for="my-file" class="input-file-trigger">{{file['name'] ||
                 (translationService.isEn?

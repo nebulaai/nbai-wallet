@@ -4,6 +4,10 @@ import * as $ from 'jquery';
 //import { TranslateService } from '@ngx-translate/core';
 import { WalletService } from '../wallet.service';
 import { TranslationService } from '../translation.service';
+import { Web3Service } from '../web3.service';
+import { Observable } from 'rxjs';
+declare let require: any;
+const Web3 = require('web3');
 
 
 @Component({
@@ -11,21 +15,49 @@ import { TranslationService } from '../translation.service';
   templateUrl: './head.component.html'
 })
 export class HeadComponent implements OnInit {
-
+  private nodeAddress: string;
   settingShow: boolean = false;
   ifCreate: boolean = false;
   currentLang: string;
+  showPopup: boolean = false;
+  validNode: boolean = true;
   private wasInside = false;
   constructor(private router: Router,
     private walletService: WalletService,
-    public translationService: TranslationService) {
+    public translationService: TranslationService,
+    private web3Service: Web3Service) {
     this.currentLang = 'en';
   }
 
   ngOnInit() {
     this.getPage();
+    this.getNodeAddress();
+    this.checkNote();
   }
 
+  getNodeAddress() {
+    this.web3Service.noteAddress$.subscribe(
+      res => {
+        this.nodeAddress = res;
+      }
+    )    
+  }
+
+  private checkNote(){
+    let currentWeb3 = new Web3(this.nodeAddress);
+    Observable.fromPromise(currentWeb3.eth.getBlockNumber()).subscribe(
+      res => {
+        this.validNode = true;
+      }, err => {
+        this.validNode = false;
+      }
+    );
+  }
+
+  private setNode(){
+    this.web3Service.setNode(this.nodeAddress);
+    this.showPopup = false;;
+  }
 
   getPage(): void {
     this.router.events.subscribe(event => {

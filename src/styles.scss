@@ -52,7 +52,7 @@ $fa-font-path: "../node_modules/font-awesome/fonts";
     font-size: 1rem;
     width: $width;
     height: $height;
-    border: none;
+    border: 1px solid $purple;
     border-radius: $radius;
     color: #fff;
     background: $purple;
@@ -66,6 +66,84 @@ a:hover, a:visited, a:link, a:active
     text-decoration: none;
 }
 
+.lightbox {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    background: rgba(200,200,200,0.5);
+
+    .lightbox-content {
+        margin: 30vh 35vw;
+        padding: 20px;
+        background: #fff;
+        border-radius: 20px;
+        @media (max-width: 980px){
+            margin: 30vh 25vw;
+        }
+
+        @media (max-width: 480px){
+            margin: 40vh 5vw;
+        }
+
+        .inside{
+            padding: 30px;
+            @media(max-width: 480px){
+                padding: 10px 30px;
+            }
+            h3{
+                padding-bottom: 3rem;
+                @media(max-width: 480px){
+                    padding-bottom: 1rem;
+                }
+            }
+    
+            input.node{
+                border-style: double;
+                margin: 1rem 0 3rem;
+                padding-left: 10px;
+                border-color: green;
+                &.invalid{
+                    margin-bottom: 0;
+                    border-color: red;
+                }
+            }
+
+            .error{
+                margin-bottom: 3rem;
+                color: red;
+                text-align: left;
+                font-size: 0.8rem;
+            }
+    
+            a{
+                margin: 2rem 1rem 0;
+                @include btn(180px, 30px, 30px);
+                padding: 10px 30px;
+                &.cancel{
+                    background: transparent;
+                    color: $purple;
+                }
+                &.disabled{
+                    background: $grey;
+                    cursor: none;
+                    border-color: $grey;
+                }
+            }
+        }
+        
+
+        #close {
+            position: relative;
+            right: -50%;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+    }
+
+}
+
 body{
     font-family: 'Helvetica Neue', sans-serif;
     margin: 0 auto;
@@ -74,6 +152,9 @@ body{
     app-head{
         header{
             height: 80px;
+            @media(max-width: 480px){
+                height: 100px
+            }
             background: #fff;
             display:flex;
             align-items: center;
@@ -82,6 +163,9 @@ body{
                 .walletlogo{
                     left: 5%;
                     position: relative;
+                    @media(max-width: 480px){
+                        margin-bottom: 1rem;
+                    }
                     img{
                         width: 300px;
                         @media (max-width: 420px) {
@@ -89,11 +173,32 @@ body{
                         }
                     }
                 }
+                .network{
+                    position: absolute;
+                    right: 19rem;
+                    top: 1.8rem;
+                    color: #fff;
+                    background: $purple;
+                    padding: 5px 20px;
+                    border-radius: 20px;
+                    cursor: pointer;
+                    @media(max-width: 980px){
+                        right: 8rem;
+                        top: 1.8rem;
+                        span{
+                            display: none;
+                        }
+                    }
+                    @media(max-width: 480px){
+                        right: 7.5rem;
+                        padding: 5px 10px;
+                    }
+                }
                 .download{
                     display: flex;
                     position: absolute;
-                    right: 9rem;
-
+                    right: 8rem;
+                    top: 1.8rem;
                     a{
                         color: #fff;
                         background: $purple;
@@ -132,7 +237,10 @@ body{
                         label:hover{
                             cursor: pointer;
                         }
-                        
+                        i.config{
+                            padding-left: 0.5rem;
+                        }
+
                     }
                     .dropdown{
                         position: absolute;
@@ -242,9 +350,9 @@ body{
                                 text-decoration: underline;
                             }
                         }
-                        &:hover{
-                            
-                        }
+                        // &:hover{
+                            // border-left: 3px solid $lightPurple;
+                        // }
                     }
                 }
             }
@@ -422,13 +530,13 @@ body{
                         }
                     }
                     div.transactions{
-                        
                         width: 100%;
                         margin: 0 4rem;
                         color: #565656;
                         background: #fff;
                         margin-bottom: 4rem;
                         font-size: 0.8rem;
+                        overflow: hidden;
                         .transaction-header{
                             padding: 1rem;
                             border-bottom: 1px solid #b2b2b2;
@@ -468,68 +576,122 @@ body{
                             }
                         }
                         .transaction-body{
+                           width: 100%;
                             .notice{
                                 padding: 1rem 0;
                                 img{
                                     width: 100px;
                                 }
                             }
-                            .results{
-                                .header, .result{
-                                    display: flex;
-                                    flex-wrap: wrap;
-                                    height: 2rem;
-                                    .field{
-                                        width: 15%;
-                                        padding: 0.4rem 0;
-                                        a{
-                                            span{
-                                                color: #565656; 
-                                            }
-                                        }
-                                        &.time{
-                                            width: 10%;
-                                        }
-                                        &.action{
-                                            width: 3%;
-                                            div{
-                                                border-radius: .4rem;
-                                                color: #fff;
-                                                font-weight: 400;
-                                                font-size: 0.8rem;
-                                                margin: 0 0.2rem;
-                                            }
-                                            .color-b{
-                                                width: 3rem;
-                                                .color-in{
-                                                    background-color: #5cb85c;
+                            .transaction-content{
+                                width: 100%;
+                                
+                                overflow-x: auto;
+                                overflow-y: hidden;
+                                table{
+                                    width: 100%;
+                                    min-width: 1180px;
+                                    tbody{
+                                        color: #333;
+                                    }
+                                    thead, tbody{
+                                        tr{
+                                            height: 2rem;
+                                            display: flex;
+                                            // flex-direction: row;
+                                            justify-content: space-around;
+                                            th, td{
+                                                .field{
+                                                    padding: 0.4rem 0;
+                                                    a{
+                                                        span{
+                                                            color: #565656; 
+                                                            overflow: hidden;
+                                                            text-overflow: ellipsis;
+                                                            white-space: nowrap;
+                                                        }
+                                                    }
                                                 }
-                                                .color-out{
-                                                    background-color: #e67e22;                                               
+                                                &.action{
+                                                    div{
+                                                        border-radius: .4rem;
+                                                        color: #fff;
+                                                        font-weight: 400;
+                                                        font-size: 0.8rem;
+                                                        margin: 0 0.2rem;
+                                                    }
+                                                    .color-b{
+                                                        width: 3rem;
+                                                        .color-in{
+                                                            background-color: #5cb85c;
+                                                        }
+                                                        .color-out{
+                                                            background-color: #e67e22;                                               
+                                                        }
+                                                        .color-cir{
+                                                            background-color: #7c42ef;   
+                                                        }
+                                                        .color-same{
+                                                            background-color: #e20d8a;   
+                                                        }
+                                                    }
+                                                    
                                                 }
-                                                .color-cir{
-                                                    background-color: #7c42ef;   
+                                                &.value{
+                                                    text-align: right;
+                                                    padding-right: 25px;
                                                 }
-                                                .color-same{
-                                                    background-color: #e20d8a;   
+                                                &.send{
+                                                    text-align: center;  
+                                                    .btn-send{
+                                                        color: #fff;
+                                                        padding: 0.2rem 0.5rem;
+                                                        background-color: #5C3CD3;
+                                                        border-radius: 5px;
+                                                    }     
                                                 }
-                                            }
-                                            
-                                        }
-                                        &.hash{
-                                            width: 27%;
-                                            a{
-                                                color: #565656;
+                                                &.hash{
+                                                    a{
+                                                        color: #565656;
+                                                    }
+                                                }
+                                                &.width-min{
+                                                    width: 120px;
+                                                }
+                                                &.width-min-s{
+                                                    width: 60px;
+                                                }
+                                                &.width-medium{
+                                                    width: 160px;
+                                                }
+                                                &.width-large{                                                  
+                                                    width: 250px;
+                                                    text-align: left;
+                                                    a{
+                                                        width: 100%;
+                                                        color: inherit;
+                                                        span{
+                                                            overflow: hidden;
+                                                            white-space: nowrap;
+                                                            text-overflow: ellipsis;
+                                                            display: block;
+                                                        }
+                                                    }
+                                                    @media (max-width: 1280px){
+                                                        width: 200px;
+                                                    }
+                                                }
                                             }
                                         }
                                     }
-                                }
-                                .header{
-                                    color: #a4a4ff;
-                                }
-                                .result{
-                                    &:nth-child(2n){
-                                        background: #f7f7f7;
+                                    .header{
+                                        color: #a4a4ff;
+                                    }
+                                    .result{
+                                        &:nth-child(2n){
+                                            background: #f7f7f7;
+                                        }
+
                                     }
                                 }
                             }
@@ -660,17 +822,27 @@ body{
                             input, select, textarea{
                                 width: 100%;
                                 border-radius: 0;  
+                                &.frominput{
+                                    height: 2rem;
+                                    position: relative;
+                                    top: -2rem;
+                                    z-index: 2;
+                                }
                             }
                             i{
                                 font-weight: 800;
                                 font-size: 1rem;
                                 position: relative;
                                 float: right;
-                                top: -1.6rem;
+                                top: -1.5rem;
                                 right: 0.8rem;
                                 color: #000;
                                 @media (max-width: 767px) {
                                     right: 0.5rem;
+                                }
+                                &.fromsign{
+                                    z-index: 3;
+                                    top: -3.5rem;
                                 }
                             }
                             button{
@@ -725,6 +897,7 @@ body{
     }
 
     div.popup{
+        z-index: 4;
         position: fixed;
         top: 0;
         left: 0;
@@ -808,7 +981,7 @@ body{
                   .js .input-file {
                     position: absolute;
                     top: 0; left: 0;
-                    width: 225px;
+                    width: 100%;
                     opacity: 0;
                     padding: 14px 0;
                     cursor: pointer;
@@ -922,6 +1095,9 @@ body{
             // background: #a678ff;
             background: rgba(12,12,12, 0.8);
             width: 520px;
+            @media(max-width: 480px){
+                width: 100%;
+            }
             height: 100vh;
             color: #fff;
             padding: 1rem;
@@ -1010,7 +1186,7 @@ body{
                   .js .input-file {
                     position: absolute;
                     top: 0; left: 0;
-                    width: 225px;
+                    width: 100%;
                     opacity: 0;
                     padding: 14px 0;
                     cursor: pointer;
@@ -1322,6 +1498,187 @@ body{
                     
                 }
             }
+            &.createForm{
+                .body{
+                    .row{
+                        @media(max-width: 480px){
+                            text-align: center;
+                            margin-top: 2rem;
+                            input{
+                                width: 100%;
+                            }
+                            textarea{
+                                width: 90vw;
+                            }
+                        }
+                    }
+                }
+            }
+            &.seedForm,
+            &.verifyForm{
+                // opacity: 1;
+                left: 35vw;
+                max-width: 600px;
+                .body{
+                    .row{
+                        text-align: center;
+                        color: $purple;
+                        font-size: 0.8rem;
+                        font-weight: 500;
+                        textarea,
+                        #wordsBox{
+                            width: 100%;
+                            margin-top: 2rem;
+                            border: 1px dotted $grey;
+                            text-align: center;
+                            padding: 1rem 4rem;
+                            @media(max-width: 480px){
+                                padding: 1rem;
+                            }
+                            .row{
+                                font-size: 1.2rem;
+                                color: $textColor;
+                                padding: 0.5rem 0;
+                                display: flex;
+                                justify-content: center;
+                            }
+                        }
+                        &.button{
+                            display: flex;
+                            justify-content: center;
+                        }
+                        input{
+                            padding: 10px 30px;
+                        }
+                        label{
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+            &.verifyForm{
+                // opacity: 1;
+                label{
+                    .error{
+                        display: none;
+                    }
+                    .normal{
+                        display: block;
+                    }
+                }
+                @media(max-width: 480px){
+                    textarea{
+                        width: 90vw;
+                    }
+                }
+            }
+            &.restoreForm {
+                // opacity: 1;
+                z-index: -1;
+                max-width: 600px;
+                .header{
+                    display: inline-block;
+                    width: 100%;
+                    padding: 0;
+                    background: transparent;
+                    .tabs{
+                        float: left;
+                        width: 50%;
+                        padding: 1rem 2%;
+                        &:hover{
+                            cursor: pointer;
+                        }
+                        &.keystore{
+                            background: $purple;
+                            @media(min-width: 481px){
+                                &.active:after{
+                                    content : '';
+                                    height: 57px;
+                                    width: 50px;
+                                    top: 0px;
+                                    border-top-right-radius: 2rem;
+                                    position : absolute;
+                                    background: $purple;
+                                    left: 286px;
+                                }
+                            }
+                        }
+                        &.seed{
+                            background: $lightPurple;
+                            @media(max-width: 480px){
+                                background: $purple;
+                            }
+                            @media(min-width: 481px){
+                                &.active:before{
+                                    content : '';
+                                    height: 57px;
+                                    width: 50px;
+                                    top: 0px;
+                                    border-top-left-radius: 2rem;
+                                    position : absolute;
+                                    background: $lightPurple;
+                                    left: 306px;
+                                }
+                            }
+                            @media(max-width: 480px){
+                                display: none;
+                            }
+                        }
+                        h2{
+                            color: #fff;
+                            @include h2;
+                            font-size: 1.2rem;
+                            margin: 0;
+                        }   
+                    }
+                }
+                .body{
+                    .contents{
+                        &.keystore{
+                            // display: none;
+                            input.password{
+                                height: 2rem;
+                                width: 100%;
+                                margin-top: 1.5rem;
+                                text-align: center;
+                            }
+                        }
+                        &.seed{
+                            display: none;
+                            .row.pass{
+                                margin-bottom: 1rem;
+                            }
+                        }
+                        .row{
+                            color: $purple;
+                            font-weight: 500;
+                            display: flex;
+                            justify-content: center;
+                            textarea{
+                                margin-top: 2rem;
+                                @media(max-width: 480px){
+                                    width: 90vw;
+                                }
+                            }
+                            &.button{
+                                input{
+                                    padding: 10px 30px;
+                                }
+                            }
+                            &.pass{
+                                padding-bottom: 0;
+                                input{
+                                    width: 100%;
+                                    text-align: center;
+                                }
+                            }
+                            &.link{
+                                text-align: center;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     
@@ -1367,7 +1724,7 @@ body{
                             svg{
                                 width:20px;
                             }
-                            div.text{font-size: 14px;;}
+                            div.text{font-size: 14px;}
                         }
                     }
                     li.wallet-link{
@@ -1433,8 +1790,8 @@ div.has-danger{
     input, select, textarea{ border: 1px solid #fff; 
         background: #fff5f5;
     }
-    label{
-    }
+    // label{
+    // }
     span {
         color: #d10000;
         font-size: 12px;

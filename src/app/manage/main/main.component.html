@@ -61,64 +61,89 @@
           {{translationService.isEn? translationService.enMap['NOTRANSACRTIONS']:translationService.cnMap['NOTRANSACRTIONS']}}
         </p>
       </div>
-      <div class="results slide-m" [ngClass]="{'empty': transactions['length']===0}">
-        <div class="header">
-          <div class="walleter field">
-            {{translationService.isEn? translationService.enMap['WALLETER']:translationService.cnMap['WALLETER']}}
-          </div>
-          <div class="action field">
-            {{translationService.isEn? translationService.enMap['ACTION']:translationService.cnMap['ACTION']}}
-          </div>
-          <div class="value field">
-            {{translationService.isEn? translationService.enMap['VALUE']:translationService.cnMap['VALUE']}}
-          </div>
-          <div class="from field">
-            {{translationService.isEn? translationService.enMap['FROM']:translationService.cnMap['FROM']}}
-          </div>
-          <div class="to field">
-            {{translationService.isEn? translationService.enMap['TO']:translationService.cnMap['TO']}}
-          </div>
-          <div class="time field">
-            {{translationService.isEn? translationService.enMap['TIME']:translationService.cnMap['TIME']}}
-          </div>
-          <div class="hash field">
-            {{translationService.isEn? translationService.enMap['TRANSACTIONHASH']:translationService.cnMap['TRANSACTIONHASH']}}
-          </div>
-        </div>
-        <div class="result" *ngFor="let transaction of transactions; let i = index">
-          <div class="walleter field">
-            {{transaction['name']}}
-          </div>
-          <div class="action field">
-            <div class="color-b">
-              <div class="color-in" *ngIf="transaction['type'] == 2" title="View completed Txns">IN</div>
-              <div class="color-out" *ngIf="transaction['type'] == 1" title="View completed Txns">OUT</div>
-              <div class="color-cir" *ngIf="transaction['type'] == 3" title="View completed Txns">SELF</div>
-              {{transaction.id}}
-            </div>
-          </div>
-          <div class="value field">
-            {{transaction['value'] | number:'.2-2'}} NBAI
-          </div>
-          <div class="from field">
-            <a href="{{scanUrl}}address/{{transaction['t_from']}}" target="_blank">
-              <span *ngIf="!transaction['fromNick']">{{transaction['t_from'] | address:10:10}}</span>
-              <span *ngIf="transaction['fromNick']">{{transaction['fromNick']}}</span>
-            </a>
-          </div>
-          <div class="to field">
-            <a href="{{scanUrl}}address/{{transaction['t_to']}}" target="_blank">
-              <span *ngIf="!transaction['toNick']">{{transaction['t_to'] | address:10:10}}</span>
-              <span *ngIf="transaction['toNick']">{{transaction['toNick']}}</span>
-            </a>
-          </div>
-          <div class="time field">
-            {{transaction['timestamp']*1000 | date}}
-          </div>
-          <div class="hash field">
-            <a href="{{scanUrl}}tx/{{transaction['hash']}}" target="_blank">{{transaction['hash'] | address:10:10}}</a>
-          </div>
-        </div>
+      <div class="transaction-content">
+        <table class="results slide-m" [ngClass]="{'empty': transactions['length']===0}">
+          <thead>
+            <tr class="header">
+              <th class="walleter field width-min">
+                {{translationService.isEn? translationService.enMap['WALLETER']:translationService.cnMap['WALLETER']}}
+              </th>
+              <th class="action field width-min-s">
+                {{translationService.isEn? translationService.enMap['ACTION']:translationService.cnMap['ACTION']}}
+              </th>
+              <th class="value field width-min">
+                {{translationService.isEn? translationService.enMap['VALUE']:translationService.cnMap['VALUE']}}
+              </th>
+              <th class="from field width-large">
+                {{translationService.isEn? translationService.enMap['FROM']:translationService.cnMap['FROM']}}
+              </th>
+              <th class="to field  width-large">
+                {{translationService.isEn? translationService.enMap['TO']:translationService.cnMap['TO']}}
+              </th>
+              <th class="time field width-medium">
+                {{translationService.isEn? translationService.enMap['TIME']:translationService.cnMap['TIME']}}
+              </th>
+              <th class="hash field  width-large">
+                {{translationService.isEn? translationService.enMap['TRANSACTIONHASH']:translationService.cnMap['TRANSACTIONHASH']}}
+              </th>
+              <th class="send field  width-min">
+                {{translationService.isEn? translationService.enMap['SENDNBAI']:translationService.cnMap['SENDNBAI']}}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="result" *ngFor="let transaction of transactions; let i = index">
+              <td class="walleter field width-min">
+                {{transaction['name']}}
+              </td>
+              <td class="action field width-min-s">
+                <div class="color-b">
+                  <div class="color-in" *ngIf="transaction['type'] == 2" title="View completed Txns">
+                    {{translationService.isEn? translationService.enMap['IN']:translationService.cnMap['IN']}}
+                  </div>
+                  <div class="color-out" *ngIf="transaction['type'] == 1" title="View completed Txns">
+                    {{translationService.isEn? translationService.enMap['OUT']:translationService.cnMap['OUT']}}
+                  </div>
+                  <div class="color-cir" *ngIf="transaction['type'] == 3" title="View completed Txns">
+                    {{translationService.isEn? translationService.enMap['SELF']:translationService.cnMap['SELF']}}
+                  </div>
+                  {{transaction.id}}
+                </div>
+              </td>
+              <td class="value field width-min">
+                {{transaction['value'] | number:'.2-2'}} NBAI
+              </td>
+              <td class="from field width-large">
+                <a href="{{scanUrl}}address/{{transaction['t_from']}}" target="_blank">
+                  <span *ngIf="!transaction['fromNick']">{{transaction['t_from']}}</span>
+                  <span *ngIf="transaction['fromNick']">{{transaction['fromNick']}}</span>
+                </a>
+              </td>
+
+              <td class="to field width-large">
+                <a href="{{scanUrl}}address/{{transaction['t_to']}}" target="_blank">
+                  <span *ngIf="!transaction['toNick']">{{transaction['t_to']}}</span>
+                  <span *ngIf="transaction['toNick']">{{transaction['toNick']}}</span>
+                </a>
+              </td>
+              <td class="time field width-medium">
+                {{transaction['timestamp']*1000 | date}}
+              </td>
+              <td class="hash field width-large">
+                <a href="{{scanUrl}}tx/{{transaction['hash']}}" target="_blank"><span>{{transaction['hash']}}</span></a>
+                <!-- <a href="{{scanUrl}}tx/{{transaction['hash']}}" target = "_blank">{{transaction['hash'] | address:10:10}}</a> -->
+              </td>
+              <td class="send field width-min">
+                <a routerLink="/dashboard/transfer" *ngIf="transaction['type'] != 2" [queryParams] = "{addressFrom: transaction['t_from'], addressTo: transaction['t_to'], nameTo: transaction['toNick']}" class="btn-send">
+                  <span>
+                      {{translationService.isEn? translationService.enMap['SENDWITHADD']:translationService.cnMap['SENDWITHADD']}}
+                  </span>
+                </a>
+                <!-- <a href="{{scanUrl}}tx/{{transaction['hash']}}" target = "_blank">{{transaction['hash'] | address:10:10}}</a> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
     <div class="transaction-more" *ngIf="isMore">
