@@ -86,9 +86,6 @@
               <th class="hash field  width-large">
                 {{translationService.isEn? translationService.enMap['TRANSACTIONHASH']:translationService.cnMap['TRANSACTIONHASH']}}
               </th>
-              <th class="send field  width-min">
-                {{translationService.isEn? translationService.enMap['SENDNBAI']:translationService.cnMap['SENDNBAI']}}
-              </th>
             </tr>
           </thead>
           <tbody>
@@ -131,15 +128,6 @@
               </td>
               <td class="hash field width-large">
                 <a href="{{scanUrl}}tx/{{transaction['hash']}}" target="_blank"><span>{{transaction['hash']}}</span></a>
-                <!-- <a href="{{scanUrl}}tx/{{transaction['hash']}}" target = "_blank">{{transaction['hash'] | address:10:10}}</a> -->
-              </td>
-              <td class="send field width-min">
-                <a routerLink="/dashboard/transfer" *ngIf="transaction['type'] != 2" [queryParams] = "{addressFrom: transaction['t_from'], addressTo: transaction['t_to'], nameTo: transaction['toNick']}" class="btn-send">
-                  <span>
-                      {{translationService.isEn? translationService.enMap['SENDWITHADD']:translationService.cnMap['SENDWITHADD']}}
-                  </span>
-                </a>
-                <!-- <a href="{{scanUrl}}tx/{{transaction['hash']}}" target = "_blank">{{transaction['hash'] | address:10:10}}</a> -->
               </td>
             </tr>
           </tbody>
