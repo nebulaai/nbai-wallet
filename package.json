@@ -29,6 +29,7 @@
     "axios": "^0.18.0",
     "bip39": "^2.5.0",
     "bootstrap": "^4.3.1",
+    "braces": "^2.3.1",
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.4.1",
     "cryptiles": "^4.1.2",
