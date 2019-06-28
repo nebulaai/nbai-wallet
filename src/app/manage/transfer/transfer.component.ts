@@ -14,7 +14,7 @@ export class TransferComponent implements OnInit {
   @ViewChild('confirmForm') confirmForm: any;
   accounts: Account[];
   popupConfirm: boolean = false;
-  errMsg: string;
+  errMsg: string = "Password does not match";
   loading: boolean = false;
   showDropDownFrom: boolean = false;
   showDropDownTo: boolean = false;
@@ -159,7 +159,8 @@ export class TransferComponent implements OnInit {
     let account = this.accounts[index];
     // console.log('account', account);
     this.tx.to = account.address;
-    this.tx.display = account.name + '  ' + this.filter(account.address, 10, 10) + '  ' + Number(account.balance).toFixed(2) + ' NBAI';
+    // this.tx.display = account.name + '  ' + this.filter(account.address, 10, 10) + '  ' + Number(account.balance).toFixed(2) + ' NBAI';
+    this.tx.display = account.name + '  ' + this.filter(account.address, 4, 4) + '  ' + Number(account.balance) + ' NBAI';
     this.showDropDownTo = false;
   }
 

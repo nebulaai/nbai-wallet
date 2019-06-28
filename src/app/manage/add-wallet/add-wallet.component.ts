@@ -25,4 +25,8 @@ export class AddWalletComponent implements OnInit {
       this.router.navigate([{ outlets: { popup: ['mnemonic'] } }]);
     }
   }
+
+  valid() {
+    this.form.controls['rePassword'].updateValueAndValidity();
+  }
 }

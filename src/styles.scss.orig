@@ -66,6 +66,53 @@ a:hover, a:visited, a:link, a:active
     text-decoration: none;
 }
 
+.lightbox {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    background: rgba(200,200,200,0.5);
+
+    .lightbox-content {
+        margin: 30vh 30vw;
+        padding: 30px;
+        background: #fff;
+
+        @media (max-width: 980px){
+            margin: 30vh 25vw;
+        }
+
+        @media (max-width: 480px){
+            margin: 30vh 5vw;
+        }
+
+        h3{
+            margin-top: 0;
+        }
+
+        input.node{
+            margin: 2rem 0;
+            padding-left: 10px;
+        }
+
+        a.confirm{
+            margin-top: 2rem;
+            @include btn(180px, 30px, 12px);
+            padding: 10px 30px;
+        }
+
+        #close {
+            position: relative;
+            top: 20px;
+            right: -50%;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+    }
+
+}
+
 body{
     font-family: 'Helvetica Neue', sans-serif;
     margin: 0 auto;
@@ -74,6 +121,9 @@ body{
     app-head{
         header{
             height: 80px;
+            @media(max-width: 480px){
+                height: 100px
+            }
             background: #fff;
             display:flex;
             align-items: center;
@@ -82,6 +132,9 @@ body{
                 .walletlogo{
                     left: 5%;
                     position: relative;
+                    @media(max-width: 480px){
+                        margin-bottom: 1rem;
+                    }
                     img{
                         width: 300px;
                         @media (max-width: 420px) {
@@ -89,11 +142,22 @@ body{
                         }
                     }
                 }
+                .network{
+                    position: absolute;
+                    right: 20rem;
+                    top: 2rem;
+                    @media(max-width: 980px){
+                        right: 10rem;
+                    }
+                    @media(max-width: 480px){
+                        top: 4rem;
+                    }
+                }
                 .download{
                     display: flex;
                     position: absolute;
-                    right: 9rem;
-
+                    right: 8rem;
+                    top: 1.8rem;
                     a{
                         color: #fff;
                         background: $purple;
@@ -132,7 +196,10 @@ body{
                         label:hover{
                             cursor: pointer;
                         }
-                        
+                        i.config{
+                            padding-left: 0.5rem;
+                        }
+
                     }
                     .dropdown{
                         position: absolute;
@@ -986,7 +1053,15 @@ body{
             top: 0;
             // background: #a678ff;
             background: rgba(12,12,12, 0.8);
+<<<<<<< HEAD
+            // width: 520px;
+            width: auto;
+=======
             width: 520px;
+            @media(max-width: 480px){
+                width: 100%;
+            }
+>>>>>>> origin/master
             height: 100vh;
             color: #fff;
             padding: 1rem;
@@ -1613,7 +1688,7 @@ body{
                             svg{
                                 width:20px;
                             }
-                            div.text{font-size: 14px;;}
+                            div.text{font-size: 14px;}
                         }
                     }
                     li.wallet-link{

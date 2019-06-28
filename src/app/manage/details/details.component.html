@@ -15,7 +15,8 @@
     <a href="javascript:;" copy [copyValue]="account.address"><img src="assets/imgs/icons/copy.svg"
         style="width: 20px;" /></a>
   </div>
-  <div class="wallet-balance">{{account['balance'] | number:'.2-2'}} NBAI</div>
+  <!-- <div class="wallet-balance">{{account['balance'] | number:'.2-2'}} NBAI</div> -->
+  <div class="wallet-balance">{{account['balance'] | number:'.0-18'}} NBAI</div>
 
   <div class="wallet-details">
 
