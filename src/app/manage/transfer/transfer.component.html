@@ -6,8 +6,10 @@
         translationService.enMap['FROM']:translationService.cnMap['FROM']}}*</label>
       <select required name="account" id="account" (change)="selectAccount()" [(ngModel)]=currentAccount
         #account="ngModel" class="form-control form-control-sm">
+        <!-- <option *ngFor="let account of accounts" [ngValue]="account">{{account.name}}&nbsp;-&nbsp;{{account.address |
+          address:10:10}}&nbsp;-&nbsp;{{account.balance | number:'.2-2'}} NBAI</option> -->
         <option *ngFor="let account of accounts" [ngValue]="account">{{account.name}}&nbsp;-&nbsp;{{account.address |
-          address:10:10}}&nbsp;-&nbsp;{{account.balance | number:'.2-2'}} NBAI</option>
+          address:4:4}}&nbsp;-&nbsp;{{account.balance | number:'.0-18'}} NBAI</option>
       </select>
       <div class="form-control-feedback" *ngIf="account.invalid&&(account.dirty || account.touched)">Wallet Address is
         required</div>
@@ -24,7 +26,8 @@
       <div class="data-container" *ngIf="showDropDownTo">
         <p *ngFor="let account of accounts; 
                        let i = index" class="data-list" (click)="updateTextBox(i)">
-          {{account.name}}&nbsp;-&nbsp;{{account.address | address:10:10}}&nbsp;-&nbsp;{{account.balance | number:'.2-2'}}
+          <!-- {{account.name}}&nbsp;-&nbsp;{{account.address | address:10:10}}&nbsp;-&nbsp;{{account.balance | number:'.2-2'}} -->
+          {{account.name}}&nbsp;-&nbsp;{{account.address | address:4:4}}&nbsp;-&nbsp;{{account.balance | number:'.0-18'}}
           NBAI
         </p>
       </div>

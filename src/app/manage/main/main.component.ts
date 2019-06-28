@@ -41,6 +41,7 @@ export class MainComponent implements OnInit {
           for (let account of this.accounts) {
             addresses += account.address + ',';
             names.push(account.name);
+            this.refresh(account);
           }
           addresses = addresses.substring(0, addresses.length - 1);
           this.walletService.getRecentTransaction(addresses, 20, 0).subscribe(

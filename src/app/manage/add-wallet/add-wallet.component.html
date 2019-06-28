@@ -23,7 +23,7 @@
             for="password">{{translationService.isEn? translationService.enMap['ENTER']:translationService.cnMap['ENTER']}}</label>
         </div>
         <input type="password" name="password" #password="ngModel" ngModel maxlength="30" required
-          pattern="^(?=.*\d)(?=.*[a-z]).{6,30}$">
+          pattern="^(?=.*\d)(?=.*[a-z]).{6,30}$" (keyup) = "valid()">
         <span
           *ngIf="password.errors?.pattern && (password.dirty || password.touched )">{{translationService.isEn? translationService.enMap['PASSFORMAT']:translationService.cnMap['PASSFORMAT']}}</span>
       </div>
@@ -39,7 +39,6 @@
         <span
           *ngIf="rePassword.errors?.compare && (rePassword.dirty || rePassword.touched )">{{translationService.isEn? translationService.enMap['PASSWORDNOTMATCH']:translationService.cnMap['PASSWORDNOTMATCH']}}</span>
       </div>
-
     </div>
     <div class="modal-footer">
       <div><span class="dot active"></span>
