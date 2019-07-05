@@ -38,7 +38,7 @@
     "ethereumjs-wallet": "^0.6.1",
     "file-saver": "^2.0.0",
     "font-awesome": "^4.7.0",
-    "handlebars": "^4.0.14",
+    "handlebars": "^4.1.0",
     "hoek": "^4.2.1",
     "jquery": "^3.4.0",
     "js-yaml": "^3.13.1",
