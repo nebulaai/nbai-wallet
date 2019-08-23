@@ -175,4 +175,8 @@ export class TransferComponent implements OnInit {
     return `${starting}...${ending}`;
   }
 
+  clearError(){
+    this.confirmForm.controls['password'].setErrors({ 'incorrect': false });
+  }
+
 }

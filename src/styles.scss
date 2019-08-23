@@ -229,6 +229,7 @@ body{
                         input{
                             width: auto;
                             -webkit-appearance:none;
+                            display: none;
                         }
                         input[type="radio"]:checked+label {
                             color: $lightPurple;
@@ -424,6 +425,9 @@ body{
                             div.balance{
                                 color: #5C3CD3;
                                 font-size: 1.8rem;
+                                &.long{
+                                    font-size: 1.5rem;
+                                }
                             }
                             svg{
                                 width: 60px;
@@ -597,7 +601,25 @@ body{
                                     thead, tbody{
                                         tr{
                                             height: 2rem;
-                                            display: flex;
+                                            // display: flex;
+                                            x:-o-prefocus, tr {
+                                                display: flex;
+                                              }
+                                            @media screen and (-webkit-min-device-pixel-ratio:0) {
+                                                & {
+                                                    display: flex;
+                                                  }
+                                            }
+                                            @-moz-document url-prefix() {
+                                                & {
+                                                    display: flex;
+                                                  }
+                                              }
+                                            @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+                                                & {
+                                                  display: '';
+                                                }
+                                              }
                                             // flex-direction: row;
                                             justify-content: space-around;
                                             th, td{

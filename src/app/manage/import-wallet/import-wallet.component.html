@@ -40,7 +40,7 @@
             <div>
               <label>{{translationService.isEn? translationService.enMap['ENTER']:translationService.cnMap['ENTER']}}</label>
             </div>
-            <input type="password" name="password" #password="ngModel" ngModel maxlength="30" required>
+            <input type="password" name="password" #password="ngModel" ngModel maxlength="30" required (ngModelChange) = "clearError()">
           </div>
           <div class="has-danger" *ngIf="incorrect">
             <span>{{translationService.isEn?
@@ -48,7 +48,7 @@
           </div>
         </div>
         <div class="modal-footer" style="border:none;">
-          <button class="default" (click)="submit()" [disabled]="editForm.form.invalid">
+          <button class="default" (click)="submit()" [disabled]="editForm.form.invalid || !keyStore">
             {{translationService.isEn? translationService.enMap['RESTORE']:translationService.cnMap['RESTORE']}}
           </button>
         </div>
@@ -140,7 +140,7 @@
               <label>{{translationService.isEn?
                 translationService.enMap['ENTERNEWKEY']:translationService.cnMap['ENTERNEWKEY']}}</label>
             </div>
-            <input type="password" name="password3" #password3="ngModel" ngModel maxlength="30" required
+            <input type="password" name="password3" #password3="ngModel" ngModel required maxlength="30"
               pattern="^(?=.*\d)(?=.*[a-z]).{6,30}$">
             <span *ngIf="password3.errors?.pattern && (password3.dirty || password3.touched )">{{translationService.isEn?
               translationService.enMap['PASSFORMAT']:translationService.cnMap['PASSFORMAT']}}</span>

@@ -16,7 +16,7 @@ export class ImportWalletComponent implements OnInit {
   @ViewChild('editForm3') form3: any;
   incorrect: boolean = false;
   file: object = {};
-  private keystore: string;
+  keyStore: string = null;
   mode: number = 1;
   pagePosition: number = 0;
   accounts = ["ss", "Aa"];
@@ -36,8 +36,8 @@ export class ImportWalletComponent implements OnInit {
     this.location.back();
   }
   submit() {
-    if (this.form.valid && this.keystore) {
-      this.addAccount(this.keystore, null, this.form.value.password);
+    if (this.form.valid && this.keyStore) {
+      this.addAccount(this.keyStore, null, this.form.value.password);
     }
   }
 
@@ -57,7 +57,7 @@ export class ImportWalletComponent implements OnInit {
     try {
       let account: Account;
       if (keyStore) {
-        const keystore: Object = JSON.parse(keyStore);
+        const keystore: Object = JSON.parse(keyStore.toLowerCase());
         const wallet = this.web3Service.importWallet(keystore, password);
         account = new Account({ address: wallet.address, keystore: keyStore, privateKey: wallet.privateKey, password: password });
       } else if (privateKey) {
@@ -70,6 +70,7 @@ export class ImportWalletComponent implements OnInit {
       this.web3Service.getBalanceSpecial(account).subscribe(
         res => {
           const balance = 0.000000000000000001 * res;
+          // console.log('balance', balance);
           account.balance = balance;
           this.walletService.addAccount(account);
         },
@@ -94,7 +95,7 @@ export class ImportWalletComponent implements OnInit {
         for (let i = 0; i < length; i++) {
           binary += String.fromCharCode(bytes[i]);
         }
-        this.keystore = binary;
+        this.keyStore = binary;
       }
       reader.readAsArrayBuffer(files[0]);
       if (files[0]['size'] > 1024 * 1024) {
@@ -136,4 +137,13 @@ export class ImportWalletComponent implements OnInit {
       callback(balance);
     });
   }
+
+  clearError(){
+    if(this.incorrect){
+      this.incorrect = false;
+    }
+  }
+
+
+  
 }

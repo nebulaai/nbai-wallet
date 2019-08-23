@@ -89,7 +89,7 @@
         <div><label>{{translationService.isEn?
             translationService.enMap['WALLETPASSWORD']:translationService.cnMap['WALLETPASSWORD']}}</label>
         </div>
-        <input type="password" name="password" #password="ngModel" ngModel maxlength="30" required>
+        <input type="password" name="password" #password="ngModel" ngModel maxlength="30" required (keyPress) = "clearError()">
         <span *ngIf="password.errors?.incorrect">{{errMsg}}
         </span>
       </div>

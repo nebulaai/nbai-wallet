@@ -33,6 +33,7 @@ export class MainComponent implements OnInit {
 
     this.walletService.getAccounts().subscribe(
       (res: Account[]) => {
+        
         if (res.length) {
           this.accounts = res;
           this.transactions = [];
@@ -41,7 +42,7 @@ export class MainComponent implements OnInit {
           for (let account of this.accounts) {
             addresses += account.address + ',';
             names.push(account.name);
-            this.refresh(account);
+            // this.refresh(account);
           }
           addresses = addresses.substring(0, addresses.length - 1);
           this.walletService.getRecentTransaction(addresses, 20, 0).subscribe(
@@ -49,7 +50,10 @@ export class MainComponent implements OnInit {
               if (res && res['result']) {
                 this.isMore = res['tx_count'] > 20 ? true : false;
                 res['result'].forEach(transaction => {
-                  transaction['value'] = transaction['value'] / 1000000000000000000
+                  // console.log('value', transaction['value']);
+                  // console.log('value after', this.web3Service.fromWei(transaction['value']));
+                  transaction['value'] = this.web3Service.fromWei(transaction['value']);
+                  // transaction['value'] = transaction['value'] / 1000000000000000000;
                   this.accounts.forEach(account => {
                     if (account['address'].toLowerCase() == transaction['t_from'].toLowerCase()) {
                       transaction['fromNick'] = account['name'];
@@ -123,4 +127,9 @@ export class MainComponent implements OnInit {
       }, err => console.error(err)
     );
   }
+
+  numberLength(num){
+    return num.toString().length;
+  }
 }
+

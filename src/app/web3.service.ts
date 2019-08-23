@@ -116,5 +116,12 @@ export class Web3Service {
     return accounts;
   }
 
+  fromWei(num){
+    return this.web3.utils.fromWei(num.toString(), 'ether');
+  }
+
+  toWei(num){
+    return this.web3.utils.toWei(num.toString(), 'ether');
+  }
 
 }

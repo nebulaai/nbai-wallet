@@ -13,6 +13,7 @@ export class ManageComponent implements OnInit {
   msgNum: number = 0;
   accounts: Array<Account>;
   total: number;
+  totalStr: string
   scanUrl: String = environment.scanUrl;
 
   constructor(private walletService: WalletService,
@@ -21,7 +22,18 @@ export class ManageComponent implements OnInit {
 
   ngOnInit() {
     this.walletService.getTotal().subscribe(
-      (res: number) => { this.total = res; },
+      (res: number) => {
+        // console.log('res total', res); 
+        this.total = res; 
+      },
+      err => console.error(err)
+    );
+
+    this.walletService.getTotalStr().subscribe(
+      (res: string) => {
+        console.log('res total', res); 
+        this.totalStr = res; 
+      },
       err => console.error(err)
     );
   }
