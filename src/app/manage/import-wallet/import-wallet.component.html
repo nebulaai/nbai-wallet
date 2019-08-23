@@ -40,7 +40,7 @@
             <div>
               <label>{{translationService.isEn? translationService.enMap['ENTER']:translationService.cnMap['ENTER']}}</label>
             </div>
-            <input type="password" name="password" #password="ngModel" ngModel maxlength="30" required>
+            <input type="password" name="password" #password="ngModel" ngModel maxlength="30" required (ngModelChange) = "clearError()">
           </div>
           <div class="has-danger" *ngIf="incorrect">
             <span>{{translationService.isEn?
@@ -48,7 +48,7 @@
           </div>
         </div>
         <div class="modal-footer" style="border:none;">
-          <button class="default" (click)="submit()" [disabled]="editForm.form.invalid">
+          <button class="default" (click)="submit()" [disabled]="editForm.form.invalid || !keyStore">
             {{translationService.isEn? translationService.enMap['RESTORE']:translationService.cnMap['RESTORE']}}
           </button>
         </div>

@@ -16,7 +16,7 @@
       <div class="wallet-content" navLink="navLink">
         <div routerLink="/dashboard/details/{{account.address}}">
           <!-- <div class="balance">{{account.balance | number:'.2-2'}} NBAI</div> -->
-          <div class="balance">{{account.balance | number:'.0-18'}} NBAI</div>
+          <div class="balance" [ngClass] = "{'long': numberLength(account.balance | number:'.0-18') > 18}">{{account.balance | number:'.0-18'}} NBAI</div>
           <div class="title">{{account.name}}</div>
           <div class="account">{{account.address | address:10:6}}</div>
         </div>
