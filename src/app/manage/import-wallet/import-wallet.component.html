@@ -140,8 +140,8 @@
               <label>{{translationService.isEn?
                 translationService.enMap['ENTERNEWKEY']:translationService.cnMap['ENTERNEWKEY']}}</label>
             </div>
-            <input type="password" name="password3" #password3="ngModel" ngModel maxlength="30" required
-              pattern="^(?=.*\d)(?=.*[a-z]).{6,30}$">
+            <input type="password" name="password3" #password3="ngModel" ngModel required
+              pattern="^(?=.*\d)(?=.*[a-z]).{65,67}$">
             <span *ngIf="password3.errors?.pattern && (password3.dirty || password3.touched )">{{translationService.isEn?
               translationService.enMap['PASSFORMAT']:translationService.cnMap['PASSFORMAT']}}</span>
           </div>
