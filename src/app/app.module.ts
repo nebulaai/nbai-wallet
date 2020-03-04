@@ -8,8 +8,6 @@ import { HeadComponent } from './head/head.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { AddWalletComponent } from './manage/add-wallet/add-wallet.component';
-// import { MnemonicComponent } from './manage/mnemonic/mnemonic.component';
-// import { VerifyMnemonicComponent } from './manage/verify-mnemonic/verify-mnemonic.component';
 import { ImportWalletComponent } from './manage/import-wallet/import-wallet.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { DetailsComponent } from './manage/details/details.component';
@@ -35,8 +33,6 @@ import { TranslationService } from './translation.service';
     ManageComponent,
     HeadComponent,
     AddWalletComponent,
-    // MnemonicComponent,
-    // VerifyMnemonicComponent,
     ImportWalletComponent,
     NotfoundComponent,
     DetailsComponent,
