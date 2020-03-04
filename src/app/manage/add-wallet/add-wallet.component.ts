@@ -75,12 +75,18 @@ export class AddWalletComponent implements OnInit {
         this.newAccount['address'] = pkey;
         this.newAccount['privateKey'] = privateKey;
         this.newAccount['keystore'] = keystore;
-        const newAcc = new Account(this.newAccount);
-        this.walletService.addAccount(newAcc);
-        this.walletService.clearAccountDetail();
-        this.downloadKeystore(keystore);
-       
-        this.router.navigateByUrl('/dashboard/main');
+        
+        if(this.newAccount['mnemonic']!=null && this.newAccount['mnemonic']!="" && this.newAccount['address'].substring(0,4)!="0x95"){
+          const newAcc = new Account(this.newAccount);
+          this.walletService.addAccount(newAcc);
+          this.walletService.clearAccountDetail();
+          this.downloadKeystore(keystore);
+          this.router.navigateByUrl('/dashboard/main');
+        }
+        else{
+          alert("We are sorry. Create wallet failed, please try again.")
+        }
+      
       } catch (e) {
         console.error(e);
       }
