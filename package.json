@@ -61,7 +61,7 @@
     "mem": ">=4.0.0"
   },
   "devDependencies": {
-    "@angular/cli": "~1.7.3",
+    "@angular/cli": "^1.7.3",
     "@angular/compiler-cli": "^5.2.0",
     "@angular/language-service": "^5.2.0",
     "@types/jasmine": "~2.8.3",
@@ -75,15 +75,12 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "lodash": "^4.17.15",
+    "lodash": ">=4.17.13",
     "lodash.mergewith": ">=4.6.2",
     "mem": ">=4.0.0",
     "protractor": "^5.4.1",
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1",
-    "typescript": "~2.5.3",
-    "lodash": ">=4.17.13",
-    "lodash.mergewith": ">=4.6.2",
-    "mem": ">=4.0.0"
+    "typescript": "~2.5.3"
   }
 }

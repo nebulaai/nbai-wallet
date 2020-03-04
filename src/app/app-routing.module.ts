@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes} from '@angular/router';
 import { ManageComponent } from './manage/manage.component';
 import { AddWalletComponent } from './manage/add-wallet/add-wallet.component';
-import { MnemonicComponent } from './manage/mnemonic/mnemonic.component';
-import { VerifyMnemonicComponent } from './manage/verify-mnemonic/verify-mnemonic.component';
+// import { MnemonicComponent } from './manage/mnemonic/mnemonic.component';
+// import { VerifyMnemonicComponent } from './manage/verify-mnemonic/verify-mnemonic.component';
 import { ImportWalletComponent } from './manage/import-wallet/import-wallet.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { DetailsComponent } from './manage/details/details.component';
@@ -24,8 +24,8 @@ const routes: Routes = [
     ]
   },
   { path: 'add-wallet', component: AddWalletComponent, outlet: 'popup'},
-  { path: 'mnemonic', component: MnemonicComponent, outlet: 'popup'},
-  { path: 'verify-mnemonic', component: VerifyMnemonicComponent, outlet: 'popup'},
+  // { path: 'mnemonic', component: MnemonicComponent, outlet: 'popup'},
+  // { path: 'verify-mnemonic', component: VerifyMnemonicComponent, outlet: 'popup'},
   { path: 'import-wallet', component: ImportWalletComponent, outlet: 'popup'},  
   { path: 'export-key', component: ExportKeyComponent, outlet: 'popup'},  
   { path: 'export-keystore', component: ExportKeystoreComponent, outlet: 'popup'}, 
