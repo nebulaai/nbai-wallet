@@ -66,26 +66,16 @@ export class AddWalletComponent implements OnInit {
       try {
         
         const seed = bip39.mnemonicToSeed(this.words);
-        // console.log('seed', seed)
         const hdWallet = hdkey.fromMasterSeed(seed);
-        // console.log('hdWallet', hdWallet)
         const key1 = hdWallet.derivePath("m/44'/60'/0'/0/0");
-        // console.log('key1', key1)
         const address = util.pubToAddress(key1._hdkey._publicKey, true);
-        // console.log('address', address)
         const pkey = util.toChecksumAddress(address.toString('hex'));
-        // console.log('pkey', pkey)
         const privateKey = util.bufferToHex(key1._hdkey._privateKey);
-        // console.log('privateKey', privateKey)
         const keystore = this.web3Service.encrypt(privateKey, this.newAccount['password']);
-        // console.log('keystore', keystore)
         this.newAccount['address'] = pkey;
         this.newAccount['privateKey'] = privateKey;
         this.newAccount['keystore'] = keystore;
-        // console.log('newAccount', this.newAccount)
-
-        // console.log('0x95',this.newAccount['address'].substring(0,4))
-        // this.newAccount['address']="0x959fd7ef9089b7142b6b908dc3a8af7aa8ff0fa1";
+        
         if(this.newAccount['mnemonic']!=null && this.newAccount['mnemonic']!="" && this.newAccount['address'].substring(0,4)!="0x95"){
           const newAcc = new Account(this.newAccount);
           this.walletService.addAccount(newAcc);
