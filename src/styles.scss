@@ -7,6 +7,8 @@ $textColor: #565656;
 $lightPurple: #8f8fff;
 
 $fa-font-path: "../node_modules/font-awesome/fonts";
+
+$footerBackground: linear-gradient(to right, #812dc9, #7a4bff);
  
 @import'~font-awesome/scss/font-awesome.scss';
 
@@ -1911,3 +1913,39 @@ select{
     transform: rotate(360deg);
   }
 }
+
+.footer.styledfoot {
+    background: $footerBackground;
+    padding-top: 2rem;
+    color: #fff;
+  
+    .logo {
+      img {
+        height: 1.5rem;
+        margin-bottom: 2rem;
+      }
+    }
+  
+    .links {
+      h4 {
+        font-size: 1.8rem;
+      }
+  
+      .link {
+        padding: 0 2rem;
+        border-right: 1px solid #fff;
+  
+        a {
+          color: #fff;
+          font-size: 1.2rem;
+        }
+  
+        &:last-child {
+          border: none;
+        }
+      }
+  
+      margin-bottom: 2rem;
+    }
+  }
+  

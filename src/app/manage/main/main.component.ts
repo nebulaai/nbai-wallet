@@ -129,7 +129,29 @@ export class MainComponent implements OnInit {
   }
 
   numberLength(num){
+    // console.log('length', num.toString().length);
     return num.toString().length;
   }
+  // isIebrowser() {
+  //   let userAgent = navigator.userAgent;
+  //   console.log('gg', userAgent);
+  //   if (userAgent.indexOf("rv") > -1) {
+  //     console.log('ie');
+  //     document.getElementById("forIe").style.removeProperty('display');
+  //     // this.render.setStyle(this.resultElement.nativeElement, 'display', '');
+  //     // this.render.removeStyle(this.resultElement.nativeElement, 'display');
+  //     // $("#forIe").css('display', "");
+  //     console.log('over-ie');
+  //   }; //判断是否IE浏览器
+
+
+
+  //   //   // if (!!window.ActiveXObject) {
+  //   //   //   console.log("这是IE");
+  //   //   // } else {
+  //   //   //   console.log("这不是IE");
+  //   //   // }
+  // }
+
 }
 

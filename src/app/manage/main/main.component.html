@@ -15,6 +15,7 @@
       </div>
       <div class="wallet-content" navLink="navLink">
         <div routerLink="/dashboard/details/{{account.address}}">
+          <!-- <div class="balance">{{account.balance | number:'.2-2'}} NBAI</div> -->
           <div class="balance" [ngClass] = "{'long': numberLength(account.balance | number:'.0-18') > 18}">{{account.balance | number:'.0-18'}} NBAI</div>
           <div class="title">{{account.name}}</div>
           <div class="account">{{account.address | address:10:6}}</div>
@@ -86,6 +87,9 @@
               <th class="hash field  width-large">
                 {{translationService.isEn? translationService.enMap['TRANSACTIONHASH']:translationService.cnMap['TRANSACTIONHASH']}}
               </th>
+              <!-- <th class="send field  width-min">
+                {{translationService.isEn? translationService.enMap['SENDNBAI']:translationService.cnMap['SENDNBAI']}}
+              </th> -->
             </tr>
           </thead>
           <tbody>
@@ -107,6 +111,9 @@
                   {{transaction.id}}
                 </div>
               </td>
+              <!-- <td class="value field width-min">
+                {{transaction['value'] | number:'.2-2'}} NBAI
+              </td> -->
               <td class="value field width-medium">
                 {{transaction['value'] | number:'.0-18'}} NBAI
               </td>
@@ -128,7 +135,16 @@
               </td>
               <td class="hash field width-large">
                 <a href="{{scanUrl}}tx/{{transaction['hash']}}" target="_blank"><span>{{transaction['hash']}}</span></a>
+                <!-- <a href="{{scanUrl}}tx/{{transaction['hash']}}" target = "_blank">{{transaction['hash'] | address:10:10}}</a> -->
               </td>
+              <!-- <td class="send field width-min">
+                <a routerLink="/dashboard/transfer" *ngIf="transaction['type'] != 2" [queryParams] = "{addressFrom: transaction['t_from'], addressTo: transaction['t_to'], nameTo: transaction['toNick']}" class="btn-send">
+                  <span>
+                      {{translationService.isEn? translationService.enMap['SENDWITHADD']:translationService.cnMap['SENDWITHADD']}}
+                  </span>
+                </a>
+                <a href="{{scanUrl}}tx/{{transaction['hash']}}" target = "_blank">{{transaction['hash'] | address:10:10}}</a>
+              </td> -->
             </tr>
           </tbody>
         </table>
