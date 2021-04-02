@@ -41,14 +41,8 @@
       </div>
     </div>
     <div class="modal-footer">
-    <div [ngClass]="{'loading': loading}">
-    </div>
-      <!--<div><span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-      </div>-->
       <div class="btn">
-        <button type="submit" [disabled]="editForm.form.invalid" class="next">     
+        <button type="submit" [disabled]="editForm.form.invalid" class="next">
           {{translationService.isEn? translationService.enMap['NEXT']:translationService.cnMap['NEXT']}}
         </button>
       </div>

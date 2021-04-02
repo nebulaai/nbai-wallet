@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Location, APP_BASE_HREF } from '@angular/common';
-import { WalletService } from '../../wallet.service';
-import { TranslationService } from '../../translation.service';
+import { Location } from '@angular/common';
 import { Account } from '../../account';
+import { WalletService } from '../../wallet.service';
 import { Web3Service } from '../../web3.service';
-
+import { TranslationService } from '../../translation.service';
 
 declare let require: any;
 const bip39 = require('bip39');
@@ -18,17 +17,19 @@ const util = require('ethereumjs-util');
 })
 export class AddWalletComponent implements OnInit {
   @ViewChild('editForm') form: any;
+  constructor(
+    private router: Router, 
+    private location: Location, 
+    private walletService: WalletService, 
+    private web3Service: Web3Service,
+    public translationService: TranslationService) 
+    { }
+
   words: any;
-  loading: boolean = false;
-  errMsg: string;
   private newAccount: any;
-  constructor(private router: Router, 
-              private web3Service: Web3Service,
-              private location: Location, 
-              private walletService: WalletService, 
-              public translationService: TranslationService) { }
 
   ngOnInit() {
+    this.words = bip39.generateMnemonic();
     this.walletService.getAccountDetail().subscribe(
       res => {
         this.newAccount = <Account>res;
@@ -40,16 +41,58 @@ export class AddWalletComponent implements OnInit {
     this.location.back();
   }
 
+  next() {
+    if (this.form.valid) {
+      this.walletService.setAccountDetail({ name: this.form.value.walletName, password: this.form.value.password });
+      this.generateWords();
+      this.generateWallet()
 
-  private compareStr(m1: string, m2: string): boolean {
-    const mArr1 = m1.trim().split(/\s+/g);
-    const mArr2 = m2.trim().split(/\s+/g);
-    if (mArr1.length !== mArr2.length) return false;
-    for (let i = 0; i < mArr1.length; i++) {
-      if (mArr1[i] !== mArr2[i]) return false;
     }
-    return true;
   }
+
+  generateWords() {
+    try {
+      let newAccount = {}
+      newAccount['mnemonic'] = this.words;
+      this.walletService.setAccountDetail(newAccount);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  generateWallet() {
+    if (this.form.valid) {
+ 
+      try {
+        
+        const seed = bip39.mnemonicToSeed(this.words);
+        const hdWallet = hdkey.fromMasterSeed(seed);
+        const key1 = hdWallet.derivePath("m/44'/60'/0'/0/0");
+        const address = util.pubToAddress(key1._hdkey._publicKey, true);
+        const pkey = util.toChecksumAddress(address.toString('hex'));
+        const privateKey = util.bufferToHex(key1._hdkey._privateKey);
+        const keystore = this.web3Service.encrypt(privateKey, this.newAccount['password']);
+        this.newAccount['address'] = pkey;
+        this.newAccount['privateKey'] = privateKey;
+        this.newAccount['keystore'] = keystore;
+        
+        if(this.newAccount['mnemonic']!=null || this.newAccount['mnemonic']!="" || this.newAccount['mnemonic']==undefined ||this.newAccount['address'].substring(0,4)!="0x95"){
+          const newAcc = new Account(this.newAccount);
+          this.walletService.addAccount(newAcc);
+          this.walletService.clearAccountDetail();
+          this.downloadKeystore(keystore);
+          this.router.navigateByUrl('/dashboard/main');
+        }
+        else{
+          alert("We are sorry. Create wallet failed, please try again.")
+        }
+      
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }
+
   private downloadKeystore(keystore: object) {
     const keystring = JSON.stringify(keystore);
     const blob = new Blob([keystring], { type: 'application/json' });
@@ -65,73 +108,8 @@ export class AddWalletComponent implements OnInit {
     link.download = `NBAI-UTC-${sDate}-${keystore['address']}`;
     link.dispatchEvent(new MouseEvent('click'));
     window.URL.revokeObjectURL(link.href);
-    window.location.reload()
   }
 
-  autoLogout() {
-    let lastTime = new Date().getTime();
-    let currentTime = new Date().getTime();
-    let timeOut = 30 * 60 * 1000;   //set period is 30 mins;
-    // let timeOut =  2*5000;   //set period is 10 seconds;
-    document.onmouseover = function() {
-      lastTime = new Date().getTime();
-    };
-    let interTime = setInterval(() => {
-      currentTime = new Date().getTime();
-      if (currentTime - lastTime > timeOut) {
-        clearInterval(interTime);
-        // console.log('timeout, leave!');
-        window.location.reload();
-      }
-    }, 1000);
-
-}
-
-  next() {
-    if (this.form.valid) {
-      this.walletService.setAccountDetail({ name: this.form.value.walletName, password: this.form.value.password });
-      // this.router.navigate([{ outlets: { popup: ['mnemonic'] } }]);
-      this.words = bip39.generateMnemonic();
-      this.walletService.getAccountDetail().subscribe(
-        res => {
-          this.newAccount = <Account>res;
-        }, err => console.log(err)
-      );
-      try {
-        let newAccount = {}
-        newAccount['mnemonic'] = this.words;
-        this.walletService.setAccountDetail(newAccount);
-        // this.router.navigate([{ outlets: { popup: ['verify-mnemonic'] } }]);
-      } catch (e) {
-        console.error(e);
-      }   
-
-      try {
-        this.loading = true;
-        const seed = bip39.mnemonicToSeed(this.form.value.mnemonic);
-        const hdWallet = hdkey.fromMasterSeed(seed);
-        const key1 = hdWallet.derivePath("m/44'/60'/0'/0/0");
-        const address = util.pubToAddress(key1._hdkey._publicKey, true);
-        const pkey = util.toChecksumAddress(address.toString('hex'));
-        const privateKey = util.bufferToHex(key1._hdkey._privateKey);
-        const keystore = this.web3Service.encrypt(privateKey, this.newAccount['password']);
-        this.newAccount['address'] = pkey;
-        this.newAccount['privateKey'] = privateKey;
-        this.newAccount['keystore'] = keystore;
-        const newAcc = new Account(this.newAccount);
-        this.walletService.addAccount(newAcc);
-        this.walletService.clearAccountDetail();
-        this.downloadKeystore(keystore);
-        this.loading = false;
-        // this.router.navigateByUrl('/dashboard/main');
-        window.location.reload()
-      } catch (e) {
-        console.error(e);
-        this.loading = false;
-      }
-
-    }
-  }
   valid() {
     this.form.controls['rePassword'].updateValueAndValidity();
   }

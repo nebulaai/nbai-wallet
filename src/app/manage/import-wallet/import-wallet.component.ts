@@ -53,7 +53,6 @@ export class ImportWalletComponent implements OnInit {
     }
   }
 
-  //TODO seperate to login and add keystone functions
   addAccount(keyStore, privateKey, password) {
     try {
       let account: Account;
@@ -89,9 +88,7 @@ export class ImportWalletComponent implements OnInit {
     if (files[0] && files[0]['name']) {
       this.file['name'] = files[0]['name'];
       const reader = new FileReader();
-      
       reader.onloadend = (evt) => {
-        //TODO const csv: string = reader.result as string;  Type 'string | ArrayBuffer' is not assignable to type 'string'.
         let binary = ""
         let bytes = new Uint8Array(evt.target['result']);
         let length = bytes.byteLength;
