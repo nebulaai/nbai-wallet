@@ -8,6 +8,8 @@ import { HeadComponent } from './head/head.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { AddWalletComponent } from './manage/add-wallet/add-wallet.component';
+import { MnemonicComponent } from './manage/mnemonic/mnemonic.component';
+import { VerifyMnemonicComponent } from './manage/verify-mnemonic/verify-mnemonic.component';
 import { ImportWalletComponent } from './manage/import-wallet/import-wallet.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { DetailsComponent } from './manage/details/details.component';
@@ -25,6 +27,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FinishTransactionComponent } from './manage/finish-transaction/finish-transaction.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { TranslationService } from './translation.service';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -33,6 +36,8 @@ import { TranslationService } from './translation.service';
     ManageComponent,
     HeadComponent,
     AddWalletComponent,
+    MnemonicComponent,
+    VerifyMnemonicComponent,
     ImportWalletComponent,
     NotfoundComponent,
     DetailsComponent,
@@ -45,6 +50,7 @@ import { TranslationService } from './translation.service';
     copyDirective,
     AddressPipe,
     FinishTransactionComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
