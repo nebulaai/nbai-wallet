@@ -42,7 +42,14 @@ export class ExportKeystoreComponent implements OnInit {
         }
       );
     } else {
-      const keyObject = JSON.parse(this.keystore);
+      let keyClose = JSON.parse(this.keystore);
+      if (typeof keyClose == 'string') {
+        keyClose = JSON.parse(JSON.parse(this.keystore));
+      }else{
+        keyClose = JSON.parse(this.keystore);
+      }
+      const keyObject = keyClose;
+      window.console.log("123", keyObject.address)
       const blob = new Blob([this.keystore], { type: 'application/json' });
       const file = URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -50,7 +57,7 @@ export class ExportKeystoreComponent implements OnInit {
       const m = date.getMonth() >= 9 ? (date.getMonth() + 1).toString() : "0" + (date.getMonth() + 1);
       const d = date.getDate() >= 10 ? date.getDate().toString() : "0" + date.getDate();
       const h = date.getHours() >= 10 ? "h" + date.getHours() : "h0" + date.getHours();
-      const min = date.getMinutes() > 10 ? "m" + date.getMinutes() : "m0" + date.getMinutes();
+      const min = date.getMinutes() >= 10 ? "m" + date.getMinutes() : "m0" + date.getMinutes();
       const sDate = date.getFullYear().toString() + m + d + h + min;
       link.href = file;
       link.download = `NBAI-UTC-${sDate}-${keyObject.address}`;

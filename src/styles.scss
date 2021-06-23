@@ -373,7 +373,8 @@ body{
                         }
                         .wallet{
                             padding: 0; 
-                            height: 220px;
+                            height: auto;
+                            min-height: 220px;
                             width: 350px;
                             @media (max-width: 370px){
                                 width: calc(100% - 2 * 10px);
@@ -427,6 +428,7 @@ body{
                             div.balance{
                                 color: #5C3CD3;
                                 font-size: 1.8rem;
+                                word-break: break-all;
                                 &.long{
                                     font-size: 1.5rem;
                                 }
@@ -1342,7 +1344,8 @@ body{
             top: 20vh;
             background: #fff;
             color: #191919;
-            height: 45vh;
+            height: auto;
+            min-height: 45vh;
             @media (max-width: 480px) {
                 height: auto;
             }
