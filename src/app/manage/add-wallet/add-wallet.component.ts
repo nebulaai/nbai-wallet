@@ -103,7 +103,7 @@ export class AddWalletComponent implements OnInit {
     const m = date.getMonth() >= 9 ? (date.getMonth() + 1).toString() : "0" + (date.getMonth() + 1);
     const d = date.getDate() >= 10 ? date.getDate().toString() : "0" + date.getDate();
     const h = date.getHours() >= 10 ? "h" + date.getHours() : "h0" + date.getHours();
-    const min = date.getMinutes() > 10 ? "m" + date.getMinutes() : "m0" + date.getMinutes();
+    const min = date.getMinutes() >= 10 ? "m" + date.getMinutes() : "m0" + date.getMinutes();
     const sDate = date.getFullYear().toString() + m + d + h + min;
     link.download = `NBAI-UTC-${sDate}-${keystore['address']}`;
     link.dispatchEvent(new MouseEvent('click'));
