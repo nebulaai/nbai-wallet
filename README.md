@@ -5,7 +5,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 npm i @angular/cli@7.3.8 or 1.7.3
 npm rebuild node-sass
 ng serve
-
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

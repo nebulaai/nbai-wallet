@@ -72,7 +72,7 @@ export class ImportWalletComponent implements OnInit {
           const balance = 0.000000000000000001 * res;
           // console.log('balance', balance);
           account.balance = balance;
-          this.walletService.addAccount(account);
+            this.walletService.addAccount(account);
         },
         err => {
           this.walletService.addAccount(account);
